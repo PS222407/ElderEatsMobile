@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Account; 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+
+
 
 class User extends Authenticatable
 {
@@ -41,4 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ConnectionInProcess(): BelongsToMany
+    {
+        return $this->belongsToMany(Account::class, 'account_users');
+    }
 }
