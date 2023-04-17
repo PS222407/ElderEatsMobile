@@ -24,7 +24,7 @@ class Account extends Model
 
     public function GetProducts()
     {
-        return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date');
+        return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date')->orderBy('expiration_date');
         //return Account_Products::where('account_id', $this->id)->get();
     }
 }

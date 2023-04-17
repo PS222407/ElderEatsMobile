@@ -16,7 +16,6 @@ class ProductList extends Controller
     $Code = $request->Code;  
     $Account = $User->Connections[$ConnectionNumber];
     $products = $Account->GetProducts;
-
     //dd($products);
     
     return view('storedProducts', ['products' => $products]);

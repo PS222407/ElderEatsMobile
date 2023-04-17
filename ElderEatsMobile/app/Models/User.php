@@ -52,5 +52,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Account::class, 'account_users');
     }
+
+    public function accounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Account::class, 'account_users');
+    }
  
 }
