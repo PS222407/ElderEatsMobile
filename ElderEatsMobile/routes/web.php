@@ -19,8 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('LoginWait', [Login::class, 'waitForResponse'])->name('LoginWait');
-
+Route::post('LoginWait', [Login::class, 'waitForResponse'])->name('LoginWait');
+Route::get('/Connect', function () {
+    return view('Login');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

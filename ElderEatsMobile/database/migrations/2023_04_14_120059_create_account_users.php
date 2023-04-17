@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('account_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('status');
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
         });
     }
 

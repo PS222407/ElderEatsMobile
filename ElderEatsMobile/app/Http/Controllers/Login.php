@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\Account; 
 use App\Models\AccountUser; 
 use App\Models\User; 
+use App\Models\Product; 
+use App\Models\Account_users; 
 use Illuminate\Support\Facades\Auth; 
+
 
 class Login extends Controller
 {
@@ -33,7 +36,8 @@ class Login extends Controller
       }
       
       public function waitForResponse(Request $request){
-       /* $ExpireDate
+        /*$ExpireDate
+        //$accountUsers = Auth::user()->ConnectionInProcess;
         $AccountUserConnection 
         if($AccountUserConnection->status == 1){
             Return view('LoginWait');
@@ -41,9 +45,24 @@ class Login extends Controller
             Return view('LoginSuccesfull');
         }else {
             Return view('LoginFailed');
-        }*/
-        $User = Auth::user()->ConnectionInProcess;
+        }
+        */
+        $User = Auth::user();
 
-        dd($User);
+        //dd($User);
+
+        $Code = $request->Code;
+        
+        $Account = Account::where('temporary_token','=',$Code)->get();
+
+//        'account_id','user_id','status',
+
+        $Account_users = new Account_users;
+
+        $Account_users->account_id = $Account[0]->id;
+        $Account_users->user_id = $User->id;
+        $Account_users->status = 1;
+        $Account_users->save();
+        dd($Account);
       }
 }

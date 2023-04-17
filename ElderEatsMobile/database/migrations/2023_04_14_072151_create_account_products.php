@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('account_products', function (Blueprint $table) {
             $table->foreignId('account_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->date('expiration_date');
-            $table->timestamp('ran_out_at');
+            $table->date('expiration_date')->nullable();
+            $table->timestamp('ran_out_at')->nullable();
         });
     }
 

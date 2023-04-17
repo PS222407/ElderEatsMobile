@@ -23,6 +23,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -47,8 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ConnectionInProcess(): BelongsToMany
+    public function ConnectionInProcess()
     {
         return $this->belongsToMany(Account::class, 'account_users');
     }
+ 
 }
