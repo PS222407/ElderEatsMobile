@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\ProductList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,9 @@ Route::get('/', function () {
 });
 
 Route::post('LoginWait', [Login::class, 'waitForResponse'])->name('LoginWait');
+
+Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
+
 Route::get('/Connect', function () {
     return view('Login');
 });

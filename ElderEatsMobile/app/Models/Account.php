@@ -11,7 +11,6 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Account; 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Account_Products; 
-
 class Account extends Model
 {
     use HasFactory;
@@ -23,9 +22,9 @@ class Account extends Model
         'temporary_token_expires_at',
     ];
 
-    public function GetCurrentProducts()
+    public function GetProducts()
     {
-        //return $this->belongsToMany(Account_Products::class, 'account_products');
+        return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date');
         //return Account_Products::where('account_id', $this->id)->get();
     }
 }

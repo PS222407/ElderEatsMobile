@@ -48,7 +48,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ConnectionInProcess()
+    public function Connections()
     {
         return $this->belongsToMany(Account::class, 'account_users');
     }

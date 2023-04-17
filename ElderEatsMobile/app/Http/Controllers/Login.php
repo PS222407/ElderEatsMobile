@@ -10,6 +10,7 @@ use App\Models\AccountUser;
 use App\Models\User; 
 use App\Models\Product; 
 use App\Models\Account_users; 
+use App\Enums\ConnectionStatus;
 use Illuminate\Support\Facades\Auth; 
 
 
@@ -61,7 +62,7 @@ class Login extends Controller
 
         $Account_users->account_id = $Account[0]->id;
         $Account_users->user_id = $User->id;
-        $Account_users->status = 1;
+        $Account_users->status = ConnectionStatus::IN_PROCESS;
         $Account_users->save();
         dd($Account);
       }
