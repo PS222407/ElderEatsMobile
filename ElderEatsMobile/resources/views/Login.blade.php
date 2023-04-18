@@ -11,7 +11,7 @@
     <form method="POST" action="{{route('LoginWait')}}" accept-charset="UTF-8">
         {{ csrf_field() }}
         <input type="text" name="Code"/>
-        <button type="submit"> submit </button>
+        <button type="submit"> Verstuur </button>
 
     </form>
 

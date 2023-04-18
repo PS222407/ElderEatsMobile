@@ -16,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+  
+    $router->group(['middleware' => 'auth'], function() {
+        Route::get('/', [ProductList::class, 'LoadProducts'])->name('ProductList');
+    });
+    $router->group(['middleware' => 'guest'], function() {
+        return view('welcome');
+    });
+
 
 Route::post('LoginWait', [Login::class, 'waitForResponse'])->name('LoginWait');
+Route::post('UpdateDatePost/{productaccountid}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
 
 Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
 
@@ -36,5 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('UpdateDate/{productaccountid}', [ProductList::class, 'updateDate'])->name('Update');
+
 
 require __DIR__.'/auth.php';

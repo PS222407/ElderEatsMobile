@@ -10,7 +10,7 @@ class account_products extends Model
     use HasFactory;
 
     protected $fillable = [
-        'account_id','product_id','expiration_date',
+        'id','account_id','product_id','expiration_date',
         
     ];
 

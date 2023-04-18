@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('quantity_in_package')->nullable();
             $table->string('barcode');
-            $table->longText('image');
+            $table->longText('image')->nullable();
             $table->timestamps();
         });
     }
