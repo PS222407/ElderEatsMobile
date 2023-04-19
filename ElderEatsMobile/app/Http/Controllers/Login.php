@@ -53,10 +53,10 @@ class Login extends Controller
         $Account_users->status = ConnectionStatus::IN_PROCESS;
         $Account_users->save();
             }else{
-                $Account_users = $User->GetConnections($Account[0]->id)->where([['account_id', '=', $Account[0]->id],['user_id','=', $User->id]])->first();;
-                $Account_users->updateExistingPivot($Account[0]->id, ['status'=>ConnectionStatus::IN_PROCESS]); 
-//$Account_users->pivot->updated_at=\DB::raw('NOW()');
-                //$Account_users->pivot->save();
+                $Account_users = $User->GetConnections()->where([['account_id', $Account[0]->id],['user_id', $User->id]])->first();
+                $Account_users->pivot->status = ConnectionStatus::IN_PROCESS; 
+                $Account_users->pivot->updated_at=\DB::raw('NOW()');
+                $Account_users->pivot->save();
                 //dd($Account_users->toArray());
             }
         /*Http::post('localhost:8000/api/v1/account-connection', [

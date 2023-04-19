@@ -26,16 +26,7 @@
         }
 
         function Process(response){
-            
-            if(response.pivot.status == 0){
-                 //geaccepteerd
-            }
-            if(response.pivot.status == 1){
-                 //nog bezig
-            }
-            if(response.pivot.status == 2){
-                 //gewijgerd
-            }
+
         }
         Data();
     </script>
