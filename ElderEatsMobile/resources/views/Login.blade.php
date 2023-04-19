@@ -8,7 +8,7 @@
 </head>
 <body>
     
-    <form method="POST" action="{{route('LoginWait')}}" accept-charset="UTF-8">
+    <form method="POST" action="{{route('requestConnection')}}" accept-charset="UTF-8">
         {{ csrf_field() }}
         <input type="text" id="Code" name="Code"/>
         <button type="submit"> Verstuur </button>

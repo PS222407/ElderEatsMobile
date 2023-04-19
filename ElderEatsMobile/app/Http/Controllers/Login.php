@@ -36,7 +36,7 @@ class Login extends Controller
         }*/
       }
       
-      public function waitForResponse(Request $request){
+      public function RequestConnection(Request $request){
 
         $User = Auth::user();
 
@@ -45,17 +45,44 @@ class Login extends Controller
         $Account = Account::where('temporary_token','=',$Code)->where('temporary_token_expires_at', '>', \DB::raw('NOW()'))->get();
 
         if(count($Account) > 0){
+            if(!$User->GetConnections($Account[0]->id)){
         $Account_users = new Account_users;
 
         $Account_users->account_id = $Account[0]->id;
         $Account_users->user_id = $User->id;
         $Account_users->status = ConnectionStatus::IN_PROCESS;
         $Account_users->save();
+            }else{
+                $Account_users = $User->GetConnections($Account[0]->id)->where([['account_id', '=', $Account[0]->id],['user_id','=', $User->id]])->first();;
+                $Account_users->updateExistingPivot($Account[0]->id, ['status'=>ConnectionStatus::IN_PROCESS]); 
+//$Account_users->pivot->updated_at=\DB::raw('NOW()');
+                //$Account_users->pivot->save();
+                //dd($Account_users->toArray());
+            }
+        /*Http::post('localhost:8000/api/v1/account-connection', [
+            'account_user' => $Account[0]->token,
+        ]);*/
+
+
+
+
         }else{
             return view('tokendoesnotexist');
         }
 
+       //dd($Account);
         //TODO: api call naar jens api voor account verbinden
-        return redirect('/');
+        return view('waitforconnection', ['accountID' => $Account[0]->id]);
+      }
+
+      public function waitForResponse(Request $request, int $accountID){
+        //    'id','account_id','user_id','status',
+        $User = Auth::user();
+        $Account = Account::where('id', '=', $accountID)->first();
+        $Account_users = Account_users::where(['account_id', '=', $accountID]);
+        //$connection = Account::where('id', '=', $accountID
+        $data = $User->GetConnections($accountID);
+       //$connection
+        return response()->json($data, 200);
       }
 }

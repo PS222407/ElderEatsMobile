@@ -25,10 +25,13 @@ use Illuminate\Support\Facades\Route;
     });
 
 
-Route::post('LoginWait', [Login::class, 'waitForResponse'])->name('LoginWait');
+Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
+
+Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
+
 Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
 
-Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
+Route::post('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
 
 Route::get('/Connect', function () {
     return view('Login');
