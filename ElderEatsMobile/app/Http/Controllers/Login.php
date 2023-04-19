@@ -37,26 +37,12 @@ class Login extends Controller
       }
       
       public function waitForResponse(Request $request){
-        /*$ExpireDate
-        //$accountUsers = Auth::user()->ConnectionInProcess;
-        $AccountUserConnection 
-        if($AccountUserConnection->status == 1){
-            Return view('LoginWait');
-        }else if($AccountUserConnection->status == 0){
-            Return view('LoginSuccesfull');
-        }else {
-            Return view('LoginFailed');
-        }
-        */
-        $User = Auth::user();
 
-        //dd($User);
+        $User = Auth::user();
 
         $Code = $request->Code;
         
         $Account = Account::where('temporary_token','=',$Code)->where('temporary_token_expires_at', '>', \DB::raw('NOW()'))->get();
-
-//        'account_id','user_id','status',
 
         if(count($Account) > 0){
         $Account_users = new Account_users;
@@ -65,9 +51,11 @@ class Login extends Controller
         $Account_users->user_id = $User->id;
         $Account_users->status = ConnectionStatus::IN_PROCESS;
         $Account_users->save();
+        }else{
+            return view('tokendoesnotexist');
         }
 
         //TODO: api call naar jens api voor account verbinden
-        dd($Account);
+        return redirect('/');
       }
 }

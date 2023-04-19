@@ -20,7 +20,7 @@ class ProductList extends Controller
 
     //dd($products);
     
-    return view('storedProducts', ['products' => $products]);
+    return view('storedProducts', ['products' => $products,'accounts' => $User->Connections , 'selectedAccount' => $Account, 'accountIndex'=> $ConnectionNumber]);
 
     }else{
         return view("noAccountConnection");
@@ -28,30 +28,30 @@ class ProductList extends Controller
         }
 
 
-    public function updateDate(Request $request, int $productID)
+    public function updateDate(Request $request, int $productID, int $accountIndex)
     {
         $ConnectionNumber = $request->input('ConnectionNumber', 0);
         $User = Auth::user();
         $Code = $request->Code;  
         if (count($User->Connections) > 0){
-        $Account = $User->Connections[$ConnectionNumber];
-        return view('editProduct', ['product' => $Account->GetProductsById($productID)]);
+        $Account = $User->Connections[$accountIndex];
+        return view('editProduct', ['product' => $Account->GetProductsById($productID),'accountIndex' => $accountIndex]);
         //dd($Account->GetProductsById($productID));
         }
     }
-    public function UpdateDatePost(Request $request, int $productID)
+    public function UpdateDatePost(Request $request, int $productID, int $accountIndex)
     {
         $Date = $request->input('datetime');
-        $ConnectionNumber = $request->input('ConnectionNumber', 0);
         $User = Auth::user();
         $Code = $request->Code;  
         if (count($User->Connections) > 0){
-        $Account = $User->Connections[$ConnectionNumber];
+        $Account = $User->Connections[$accountIndex];
         $product = $Account->GetProductsById($productID);
+        //dd($product);
         $product->pivot->expiration_date =$Date;
         $product->pivot->save();
 
-        return redirect('ProductList');
+        return redirect('/?ConnectionNumber='.$accountIndex);
     }
 
 }

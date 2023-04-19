@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('LoginWait', [Login::class, 'waitForResponse'])->name('LoginWait');
-Route::post('UpdateDatePost/{productaccountid}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
+Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
 
 Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
 
@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('UpdateDate/{productaccountid}', [ProductList::class, 'updateDate'])->name('Update');
+Route::get('UpdateDate/{productaccountid}/{accountIndex}', [ProductList::class, 'updateDate'])->name('Update');
 
 
 require __DIR__.'/auth.php';

@@ -39,11 +39,11 @@
         <h5>{{$product->name}}</h3>
         @if (isset($product->pivot->expiration_date))
             <p>--{{$product->pivot->expiration_date}}</p>
-            <td><button onclick="location.href='{{ url('UpdateDate/'. $product->pivot->id) }}'"> verander houdbaarheidsdatum 
+            <td><button onclick="location.href='{{ url('UpdateDate/'. $product->pivot->id.'/'.$accountIndex )}}'"> verander houdbaarheidsdatum 
             </button></td>
 
             @else
-            <td><button onclick="location.href='{{ url('UpdateDate/'. $product->pivot->id) }}'"> voeg houdbaarheidsdatum toe
+            <td><button onclick="location.href='{{ url('UpdateDate/'. $product->pivot->id.'/'.$accountIndex )}}'"> voeg houdbaarheidsdatum toe
             </button></td>
 
         @endif
@@ -56,6 +56,31 @@
 
     </div>
     <button class="vertical"> instellingen </button>
-    <button class="vertical"> verbinden met account </button>
+    <td><button onclick="location.href='{{ url('Connect') }}'"> verbinden met account
+    </button></td>
+    @php
+    $i = 0;
+    @endphp
+    <form action="/" method="get" name="FormM"> 
+      <select name="ConnectionNumber"  onchange="this.form.submit()" > 
+              @foreach ($accounts as $account) 
+              <option value="{{$i}}" 
+
+          
+
+                @if($account->id == $selectedAccount->id)
+                 selected
+               @endif
+>
+            @if (isset($account->name))
+              {{$i+1 .': '.$account->name}}
+            @else
+              {{$i+1}}
+            @endif
+          </option>
+          {{$i++;}}
+            @endforeach     
+      </select>
+    </form>
 </body>
 </html>
