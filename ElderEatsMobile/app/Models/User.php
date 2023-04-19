@@ -58,7 +58,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Account::class, 'account_users');
     }
     public function GetConnections(): BelongsToMany{
-        return $this->belongsToMany(Account::class, 'account_users')->withPivot('status');
+        return $this->belongsToMany(Account::class, 'account_users')->withPivot('status','updated_at');
     }
    // return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date','id')->where('account_products.id' ,'=', $productID)->first();
 }

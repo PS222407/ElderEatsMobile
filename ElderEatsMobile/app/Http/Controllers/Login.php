@@ -44,8 +44,9 @@ class Login extends Controller
         
         $Account = Account::where('temporary_token','=',$Code)->where('temporary_token_expires_at', '>', \DB::raw('NOW()'))->get();
 
+        //dd(count($User->GetConnections($Account[0]->id)));
         if(count($Account) > 0){
-            if(!$User->GetConnections($Account[0]->id)){
+            if(!$User->GetConnections()->where([['account_id', $Account[0]->id],['user_id', $User->id]])->first()){
         $Account_users = new Account_users;
 
         $Account_users->account_id = $Account[0]->id;
@@ -79,9 +80,10 @@ class Login extends Controller
         //    'id','account_id','user_id','status',
         $User = Auth::user();
         $Account = Account::where('id', '=', $accountID)->first();
-        $Account_users = Account_users::where(['account_id', '=', $accountID]);
+        $Account_users = $User->GetConnections()->where([['account_id', $accountID],['user_id', $User->id]])->first();
+
         //$connection = Account::where('id', '=', $accountID
-        $data = $User->GetConnections($accountID);
+        $data = $Account_users;
        //$connection
         return response()->json($data, 200);
       }

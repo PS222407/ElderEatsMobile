@@ -36,6 +36,9 @@ Route::post('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductL
 Route::get('/Connect', function () {
     return view('Login');
 });
+Route::get('/Connectionfailed', function () {
+    return view('LoginFailed');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

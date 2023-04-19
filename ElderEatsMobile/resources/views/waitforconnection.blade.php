@@ -18,15 +18,29 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "X-CSRF-Token": csrfToken
-            },
-            body: JSON.stringify({ "id": 78912 })
+            }, 
         })
         .then(response => response.json())
         .then(response => Process(response))
         }
 
         function Process(response){
+            console.log(JSON.stringify(response));
+            if(response.pivot.status==0){
+                location.href='{{ url('/')}}';
+            }
+            if(response.pivot.status==1){
 
+                console.log(':)');
+
+                setTimeout(function() {
+                    Data();
+                }, 1000);
+            }
+            if(response.pivot.status==2){
+                location.href='{{ url('/Connectionfailed')}}';
+            }
+            //if(response.pivot.updated_at )
         }
         Data();
     </script>

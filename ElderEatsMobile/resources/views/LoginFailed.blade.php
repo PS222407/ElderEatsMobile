@@ -7,6 +7,8 @@
     <title>Login mislukt</title>
 </head>
 <body>
-    <h1>de login is niet gelukt</h1>
+    <h1>de login is niet gelukt.</h1>
+    <td><button onclick="location.href='{{ url('/') }}'"> ga terug
+    </button></td>
 </body>
 </html>
