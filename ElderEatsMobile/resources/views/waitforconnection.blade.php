@@ -8,6 +8,7 @@
     <title>Wachten</title>
 </head>
 <body>
+    <h1>wachten tot verbinding is goedgekeurd</h1>
     <script>
         const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 

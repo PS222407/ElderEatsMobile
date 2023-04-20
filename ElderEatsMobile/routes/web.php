@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\ProductList;
 use Illuminate\Support\Facades\Route;
-
+//GetShoppingList
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,22 +23,24 @@ use Illuminate\Support\Facades\Route;
     $router->group(['middleware' => 'guest'], function() {
         return view('welcome');
     });
+    Route::post('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
+    Route::get('UpdateDate/{productaccountid}/{accountIndex}', [ProductList::class, 'updateDate'])->name('Update');
+    Route::get('shoppingList/{accountIndex}', [ProductList::class, 'GetShoppingList'])->name('shoppingList');
 
 
-Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 
-Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
 
+    Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
+    Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
+    Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
 Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
-
-Route::post('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
-
 Route::get('/Connect', function () {
     return view('Login');
 });
 Route::get('/Connectionfailed', function () {
     return view('LoginFailed');
 });
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -48,8 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::get('UpdateDate/{productaccountid}/{accountIndex}', [ProductList::class, 'updateDate'])->name('Update');
 
 
 require __DIR__.'/auth.php';

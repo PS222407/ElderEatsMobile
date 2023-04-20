@@ -9,7 +9,9 @@ use App\Models\Product;
 
 class ProductList extends Controller
 {
-    public function LoadProducts(Request $request){
+
+    public function LoadProducts(Request $request)
+    {
     
     $ConnectionNumber = $request->input('ConnectionNumber', 0);
     $User = Auth::user();
@@ -25,7 +27,7 @@ class ProductList extends Controller
     }else{
         return view("noAccountConnection");
     }
-        }
+    }
 
 
     public function updateDate(Request $request, int $productID, int $accountIndex)
@@ -44,15 +46,29 @@ class ProductList extends Controller
         $Date = $request->input('datetime');
         $User = Auth::user();
         $Code = $request->Code;  
-        if (count($User->Connections) > 0){
-        $Account = $User->Connections[$accountIndex];
-        $product = $Account->GetProductsById($productID);
-        //dd($product);
-        $product->pivot->expiration_date =$Date;
-        $product->pivot->save();
+            if (count($User->Connections) > 0){
+            $Account = $User->Connections[$accountIndex];
+            $product = $Account->GetProductsById($productID);
+            //dd($product);
+            $product->pivot->expiration_date =$Date;
+            $product->pivot->save();
 
-        return redirect('/?ConnectionNumber='.$accountIndex);
+            return redirect('/?ConnectionNumber='.$accountIndex);
+            }
+        
     }
 
-}
+    public function GetShoppingList(Request $request, int $accountIndex){
+        $User = Auth::user();
+        if ($accountIndex > count($User->Connections)){
+            $Account = $User->Connections[0];
+
+            return view('shoppingList',['products'=>$Account->GetFixedProducts()]);
+        }else{
+
+            $Account = $User->Connections[$accountIndex];
+
+            return view('shoppingList',['products'=>$Account->GetFixedProducts()]);
+        }
+    }
 }

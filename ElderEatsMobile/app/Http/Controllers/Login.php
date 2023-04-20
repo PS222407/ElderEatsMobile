@@ -87,4 +87,15 @@ class Login extends Controller
        //$connection
         return response()->json($data, 200);
       }
+
+      public function LogoutUser(Request $request){
+        
+        Auth::logout();
+
+        $request->session()->invalidate();
+ 
+        $request->session()->regenerateToken();
+     
+        return redirect('/');
+      }
 }

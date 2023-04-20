@@ -58,6 +58,10 @@
     <button class="vertical"> instellingen </button>
     <td><button onclick="location.href='{{ url('Connect') }}'"> verbinden met account
     </button></td>
+    <td><button onclick="location.href='{{ url('logout')}}'"> loguit
+    </button></td>
+    <td><button onclick="location.href='{{ url('shoppingList/'. $accountIndex )}}'"> boodschappen lijst
+    </button></td>
     @php
     $i = 0;
     @endphp
