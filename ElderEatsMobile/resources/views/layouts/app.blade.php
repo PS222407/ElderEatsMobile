@@ -32,5 +32,7 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script>localStorage.theme = 'light'</script>
     </body>
 </html>
