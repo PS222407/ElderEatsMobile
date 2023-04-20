@@ -14,6 +14,11 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            'banner': '#519162',
+            'label': '#777777',
+            'hamburger': '#365F41',
+        },
     },
 
     plugins: [require('@tailwindcss/forms')],
