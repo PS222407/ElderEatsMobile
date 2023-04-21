@@ -24,9 +24,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('inventory', [ProductList::class, 'LoadProducts'])->name('ProductList');
         
     });
-    $router->group(['middleware' => 'guest'], function() {
-        return view('welcome');
-    });
+
     Route::get('ProductList/{ConnectionNumber}', [ProductList::class, 'LoadProducts'])->name('ProductList');
     Route::get('UpdateDate/{productaccountid}/{accountIndex}', [ProductList::class, 'updateDate'])->name('Update');
     Route::get('shoppingList/{accountIndex}', [ProductList::class, 'GetShoppingList'])->name('shoppingList');

@@ -45,7 +45,7 @@
 </head>
 
 <body>
-    <div class=" mx-36">
+    <div class="">
         @include('layouts.sidenav')
 
     <h1>BoodschappenLijst</h1>
@@ -55,9 +55,10 @@
         <div class=" w-full grid grid-cols-3">
 
         @foreach ($products as $product)
-            <div class=" bg-unused m-1 w-90 overflow-hidden relative" onclick='changecolor({{ $product->id }})'>
+            <div class=" m-1 w-90 overflow-hidden relative shadow-xl" onclick='changecolor({{ $product->id }})'>
                 @if (isset($product->image))
-                test
+            
+                <img class=" w-28 h-28" src={{$product->image}} />
                 @endif
                 <h5 class=" left-0">{{ $product->name }}</h5>
                 </td>

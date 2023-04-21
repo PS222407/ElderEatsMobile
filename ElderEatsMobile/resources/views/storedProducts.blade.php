@@ -33,11 +33,11 @@
 
 <body>
 
-    <div class=" mx-36">
+    <div class="">
         @include('layouts.sidenav')
 
         <div>
-            <div class=" h-96 overflow-scroll flex-auto">
+            <div class=" m-3 overflow-scroll flex-auto">
 
                 @foreach ($products as $product)
                     <div class=" relative flex">
