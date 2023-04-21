@@ -22,23 +22,12 @@ class Login extends Controller
             return view('tokendoesnotexist');
         }
 
-        $accountUser = Account_users::where([
-            ['status', '!=', ConnectionStatus::CONNECTED],
-            ['user_id', Auth::id()],
-            ['account_id', $account->id],
-        ])->select('id')->first();
-
-        if ($accountUser) {
-            Account_users::find($accountUser->id)->update([
-                'status' => ConnectionStatus::IN_PROCESS,
-            ]);
-        } else {
-            Account_users::create([
-                'user_id' => Auth::id(),
-                'account_id' => $account->id,
-                'status' => ConnectionStatus::IN_PROCESS,
-            ]);
-        }
+        Account_users::updateOrCreate([
+            'user_id' => Auth::id(),
+            'account_id' => $account->id,
+        ], [
+            'status' => ConnectionStatus::IN_PROCESS,
+        ]);
 
         Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
             'account_token' => $account->token,
