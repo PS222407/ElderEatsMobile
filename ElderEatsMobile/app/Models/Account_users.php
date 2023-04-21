@@ -10,7 +10,7 @@ class Account_users extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','account_id','user_id','status','updated_at',
-        
+        'id', 'account_id', 'user_id', 'status', 'updated_at',
+
     ];
 }

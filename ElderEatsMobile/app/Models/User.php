@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Account; 
+use App\Models\Account;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
@@ -50,15 +50,16 @@ class User extends Authenticatable
 
     public function Connections()
     {
-        return $this->belongsToMany(Account::class, 'account_users')->withPivot('status')->where('status','=','0');
+        return $this->belongsToMany(Account::class, 'account_users')->withPivot('status')->where('status', '=', '0');
     }
 
     public function accounts(): BelongsToMany
     {
         return $this->belongsToMany(Account::class, 'account_users');
     }
-    public function GetConnections(): BelongsToMany{
-        return $this->belongsToMany(Account::class, 'account_users')->withPivot('status','updated_at');
+    public function GetConnections(): BelongsToMany
+    {
+        return $this->belongsToMany(Account::class, 'account_users')->withPivot('status', 'updated_at');
     }
-   // return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date','id')->where('account_products.id' ,'=', $productID)->first();
+    // return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date','id')->where('account_products.id' ,'=', $productID)->first();
 }

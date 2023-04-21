@@ -21,6 +21,8 @@ module.exports = {
             'hamburger': '#365F41',
             green : colors.green,
             white : '#ffffff',
+            gray : '#cccccc',
+            unused : '#aaaaaa'
         },
     },
 
