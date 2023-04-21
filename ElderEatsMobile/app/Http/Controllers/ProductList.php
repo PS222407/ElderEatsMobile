@@ -22,11 +22,11 @@ class ProductList extends Controller
 
     //dd($products);
     
-    return view('storedProducts', ['products' => $products,'accounts' => $User->Connections , 'selectedAccount' => $Account, 'accountIndex'=> $ConnectionNumber]);
+        return view('storedProducts', ['products' => $products,'accounts' => $User->Connections , 'selectedAccount' => $Account, 'accountIndex'=> $ConnectionNumber]);
 
-    }else{
-        return view("noAccountConnection");
-    }
+        }else{
+            return view("noAccountConnection");
+        }
     }
 
 
@@ -62,13 +62,9 @@ class ProductList extends Controller
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)){
             $Account = $User->Connections[0];
-
-            return view('shoppingList',['products'=>$Account->GetFixedProducts()]);
         }else{
-
             $Account = $User->Connections[$accountIndex];
-
-            return view('shoppingList',['products'=>$Account->GetFixedProducts()]);
         }
+        return view('shoppingList',['products'=>$Account->GetFixedProducts()]);
     }
 }
