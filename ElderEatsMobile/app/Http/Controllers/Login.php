@@ -63,15 +63,19 @@ class Login extends Controller
                 //dd($Account_users->toArray());
             }
 
-            Http::post(config('app.tablet_domain').'/api/v1/account-connection', [
-                'account_user' => $Account[0]->token,
-            ]);
+//            Http::post(config('app.tablet_domain').'/api/v1/account-connection', [
+//                'account_user' => $Account[0]->token,
+//            ]);
         } else {
             return view('tokendoesnotexist');
         }
 
         //dd($Account);
         //TODO: api call naar jens api voor account verbinden
+        Http::post(config('app.tablet_domain').'/api/v1/account-connection', [
+            'account_user' => $Account[0]->token,
+        ]);
+
         return view('waitforconnection', ['accountID' => $Account[0]->id]);
     }
 
