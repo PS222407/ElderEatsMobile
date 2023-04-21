@@ -1,7 +1,7 @@
 @extends('layouts.bas')
 
 @section('content')
-    <div class=" mx-36 bg-banner h-screen">
+    <div class="bg-banner h-screen">
         @include('layouts.sidenav')
         <div class=" flex items-center pb-5 mx-10">
             <p class=" text-gray">apparaat:</p>
