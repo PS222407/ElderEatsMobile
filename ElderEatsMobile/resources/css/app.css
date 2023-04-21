@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.flex-container {
+    display: flex;
+    background-color: #d0d0d0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: 700px;
+    width: 444px;
+    overflow: auto;
+    float: left;
+}
+
+.flex-container>div {
+    flex: 1 0 21%;
+    background-color: #f1f1f1;
+    margin: 5px;
+    padding: 5px;
+    font-size: 18px;
+    width: 140px
+}
+
+.vertical {
+    float: left;
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.vertical2 {
+    float: left;
+    padding-left: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.flex-container {
+    display: flex;
+    background-color: #d0d0d0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: 700px;
+    width: 60%;
+    overflow: auto;
+    float: left;
+}
+
+.flex-container>div {
+    background-color: #f1f1f1;
+    margin: 5px;
+    padding: 5px;
+    font-size: 18px;
+    width: 140px
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reader {
+    width: 600px;
+}
+
+#result {
+    text-align: center;
+    font-size: 1.5rem;
+}

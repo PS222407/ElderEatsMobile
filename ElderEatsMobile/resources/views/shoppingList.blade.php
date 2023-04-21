@@ -1,79 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.bas')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BoodschappenLijst</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        .flex-container {
-            display: flex;
-            background-color: #d0d0d0;
-            flex-direction: row;
-            flex-wrap: wrap;
-            max-height: 700px;
-            width: 444px;
-            overflow: auto;
-            float: left;
-        }
-
-        .flex-container>div {
-            flex: 1 0 21%;
-            background-color: #f1f1f1;
-            margin: 5px;
-            padding: 5px;
-            font-size: 18px;
-            width: 140px
-        }
-
-        .vertical {
-            float: left;
-
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-
-        .vertical2 {
-            float: left;
-            padding-left: 30px;
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-    </style>
-</head>
-
-<body>
+@section('content')
     <div class=" mx-36">
         @include('layouts.sidenav')
 
-    <h1>BoodschappenLijst</h1>
-    <p>product gekocht? vergeet niet af te vinken.</p>
+        <h1>BoodschappenLijst</h1>
+        <p>product gekocht? vergeet niet af te vinken.</p>
 
-    <div class=" flex  w-full">
-        <div class=" w-full grid grid-cols-3">
+        <div class=" flex  w-full">
+            <div class=" w-full grid grid-cols-3">
 
-        @foreach ($products as $product)
-            <div class=" bg-unused m-1 w-90 overflow-hidden relative" onclick='changecolor({{ $product->id }})'>
-                @if (isset($product->image))
-                test
-                @endif
-                <h5 class=" left-0">{{ $product->name }}</h5>
-                </td>
-                <div class=" absolute right-0 top-0" checkState=0 id='check-{{ $product->id }}'>
-                    <svg fill="#000000" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <path
-                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
-                    </svg>
-                </div>
+                @foreach ($products as $product)
+                    <div class=" bg-unused m-1 w-90 overflow-hidden relative" onclick='changecolor({{ $product->id }})'>
+                        @if (isset($product->image))
+                            test
+                        @endif
+                        <h5 class=" left-0">{{ $product->name }}</h5>
+                        </td>
+                        <div class=" absolute right-0 top-0" checkState=0 id='check-{{ $product->id }}'>
+                            <svg fill="#000000" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                            </svg>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
-        @endforeach
-
         </div>
     </div>
-</div>
     <script>
         function changecolor(id) {
             var box = document.getElementById("check-" + id);
@@ -88,6 +44,4 @@
             }
         }
     </script>
-</body>
-
-</html>
+@endsection

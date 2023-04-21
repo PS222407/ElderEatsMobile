@@ -1,45 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.bas')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect</title>
-</head>
-
-<body>
-
+@section('content')
     <form method="POST" action="{{ route('requestConnection') }}" accept-charset="UTF-8">
         {{ csrf_field() }}
-        <input type="text" id="Code" name="Code" />
-        <button type="submit"> Verstuur </button>
+        <input type="text" id="Code" name="Code"/>
+        <button type="submit"> Verstuur</button>
         <main>
             <div id="reader"></div>
         </main>
-
     </form>
 
-    <style>
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #reader {
-            width: 600px;
-        }
-
-        #result {
-            text-align: center;
-            font-size: 1.5rem;
-        }
-    </style>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"
-        integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer>
         const scanner = new Html5QrcodeScanner('reader', {
             // Scanner will be initialized in DOM inside element with id of 'reader'
@@ -50,6 +23,7 @@
             fps: 20, // Frames per second to attempt a scan
         });
         scanner.render(success, error);
+
         // Starts scanner
         function success(result) {
             document.getElementById('Code').value = `${result}`
@@ -65,6 +39,4 @@
             // Prints any errors to the console
         }
     </script>
-</body>
-
-</html>
+@endsection
