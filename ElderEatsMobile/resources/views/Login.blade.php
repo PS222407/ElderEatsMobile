@@ -1,6 +1,7 @@
 @extends('layouts.bas')
 
 @section('content')
+    <h1 class="title">QR-code scanner</h1>
     <form method="POST" action="{{ route('requestConnection') }}" accept-charset="UTF-8">
         {{ csrf_field() }}
         <input type="text" id="Code" name="Code"/>
@@ -8,6 +9,12 @@
         <main>
             <div id="reader"></div>
         </main>
+        <h3 class="title">Of voer handmatig de code in</h3>
+        <div class="connect-field-button">
+        <input placeholder="5-cijferige code" class="connect-field" type="text" id="Code" name="Code" />
+        <button class="connect-button" type="submit"> Verbinden </button>
+        </div>
+
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"
@@ -19,7 +26,7 @@
             qrbox: {
                 width: 250,
                 height: 250,
-            }, // Sets dimensions of scanning box (set relative to reader element width)
+        }, // Sets dimensions of scanning box (set relative to reader element width)
             fps: 20, // Frames per second to attempt a scan
         });
         scanner.render(success, error);
