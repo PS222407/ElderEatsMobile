@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.bas')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-    <div class=" bg-banner h-screen">
+@section('content')
+    <div class=" mx-36 bg-banner h-screen">
         @include('layouts.sidenav')
         <div class=" flex items-center pb-5 mx-10">
             <p class=" text-gray">apparaat:</p>
@@ -39,12 +30,12 @@
         <div class=" flex justify-center">
             <div class="grid grid-cols-1">
                 <a class=" text-white flex justify-center"
-                    onclick="location.href='{{ url('ProductList/' . $accountIndex) }}'">
+                   onclick="location.href='{{ url('ProductList/' . $accountIndex) }}'">
                     Inventaris
                 </a>
 
                 <a class=" text-white flex justify-center"
-                    onclick="location.href='{{ url('shoppingList/' . $accountIndex) }}'">
+                   onclick="location.href='{{ url('shoppingList/' . $accountIndex) }}'">
                     Boodschappenlijst
                 </a>
             </div>
@@ -100,6 +91,4 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection
