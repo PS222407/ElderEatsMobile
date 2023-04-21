@@ -29,9 +29,9 @@ Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
 Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
 Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
-Route::get('/Connect', 'Login');
-Route::get('/Connectionfailed', 'LoginFailed');
-Route::get('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+Route::view('/Connect', 'Login');
+Route::view('/Connectionfailed', 'LoginFailed');
+Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
