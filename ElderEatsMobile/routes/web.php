@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [Login::class, 'LoadMenu'])->name('menu');
     Route::get('inventory', [ProductList::class, 'LoadProducts'])->name('ProductList');
+    Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 });
 
 Route::get('ProductList/{ConnectionNumber}', [ProductList::class, 'LoadProducts'])->name('ProductList');
@@ -26,7 +27,6 @@ Route::get('UpdateDate/{productaccountid}/{accountIndex}', [ProductList::class, 
 Route::get('shoppingList/{accountIndex}', [ProductList::class, 'GetShoppingList'])->name('shoppingList');
 
 Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
-Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
 Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
 Route::view('/Connect', 'Login');

@@ -11,6 +11,5 @@ class Account_users extends Model
 
     protected $fillable = [
         'id', 'account_id', 'user_id', 'status', 'updated_at',
-
     ];
 }

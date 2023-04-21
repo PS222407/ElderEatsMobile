@@ -6,9 +6,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Account;
-use App\Models\AccountUser;
-use App\Models\User;
-use App\Models\Product;
 use App\Models\Account_users;
 use App\Enums\ConnectionStatus;
 use Illuminate\Support\Facades\Auth;
@@ -17,66 +14,27 @@ use Illuminate\Support\Facades\Http;
 
 class Login extends Controller
 {
-    public function SendCode(Request $request)
-    {
-        /* $code = $request->input('code', 'null');
-
-        if($code != 'null'){
-
-            $Results = Accounts::where('temporary_token',$code)->where('temporary_token_expires_at', '<', \DB::raw('NOW()'));
-
-            if(count($Results) == 0){
-                //result not found
-            }else if{count($Results) > 1}{
-                //error more then one device found
-            }else{
-                $accountUser = new AccountUser
-                $accountUser->status = 1;
-            }
-
-        }*/
-    }
-
     public function RequestConnection(Request $request)
     {
+        $account = Account::where('temporary_token', $request->Code)->where('temporary_token_expires_at', '>=', now())->first();
 
-        $User = Auth::user();
-
-        $Code = $request->Code;
-
-        $Account = Account::where('temporary_token', '=', $Code)->where('temporary_token_expires_at', '>', \DB::raw('NOW()'))->get();
-
-        //dd(count($User->GetConnections($Account[0]->id)));
-        if (count($Account) > 0) {
-            if (!$User->GetConnections()->where([['account_id', $Account[0]->id], ['user_id', $User->id]])->first()) {
-                $Account_users = new Account_users;
-
-                $Account_users->account_id = $Account[0]->id;
-                $Account_users->user_id = $User->id;
-                $Account_users->status = ConnectionStatus::IN_PROCESS;
-                $Account_users->save();
-            } else {
-                $Account_users = $User->GetConnections()->where([['account_id', $Account[0]->id], ['user_id', $User->id]])->first();
-                $Account_users->pivot->status = ConnectionStatus::IN_PROCESS;
-                $Account_users->pivot->updated_at = \DB::raw('NOW()');
-                $Account_users->pivot->save();
-                //dd($Account_users->toArray());
-            }
-
-//            Http::post(config('app.tablet_domain').'/api/v1/account-connection', [
-//                'account_user' => $Account[0]->token,
-//            ]);
-        } else {
+        if (!$account) {
             return view('tokendoesnotexist');
         }
 
-        //dd($Account);
-        //TODO: api call naar jens api voor account verbinden
-        Http::post(config('app.tablet_domain').'/api/v1/account-connection', [
-            'account_user' => $Account[0]->token,
+        Account_users::updateOrCreate([
+            'status' => ConnectionStatus::INACTIVE,
+            'user_id' => Auth::id(),
+            'account_id' => $account->id,
+        ], [
+            'status' => ConnectionStatus::IN_PROCESS,
         ]);
 
-        return view('waitforconnection', ['accountID' => $Account[0]->id]);
+        Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
+            'account_token' => $account->token,
+        ]);
+
+        return view('waitforconnection', ['accountID' => $account->id]);
     }
 
     public function waitForResponse(Request $request, int $accountID)
@@ -94,18 +52,16 @@ class Login extends Controller
 
     public function LogoutUser(Request $request)
     {
-
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
 
-    public function LoadMenu(Request $request){
-
+    public function LoadMenu(Request $request)
+    {
         $ConnectionNumber = $request->input('ConnectionNumber', 0);
         $User = Auth::user();
         if (count($User->Connections) > 0) {

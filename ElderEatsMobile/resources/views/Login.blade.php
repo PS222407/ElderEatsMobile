@@ -1,10 +1,10 @@
 @extends('layouts.bas')
 
 @section('content')
-    <form method="POST" action="{{ route('requestConnection') }}" accept-charset="UTF-8">
+    <form method="POST" id="requestConnForm" action="{{ route('requestConnection') }}" accept-charset="UTF-8">
         {{ csrf_field() }}
         <input type="text" id="Code" name="Code"/>
-        <button type="submit"> Verstuur</button>
+        <button type="submit">Verstuur</button>
         <main>
             <div id="reader"></div>
         </main>
@@ -26,7 +26,8 @@
 
         // Starts scanner
         function success(result) {
-            document.getElementById('Code').value = `${result}`
+            document.getElementById('Code').value = `${result}`;
+            document.getElementById('requestConnForm').submit();
             // Prints result as a link inside result element
             scanner.clear();
             // Clears scanning instance
