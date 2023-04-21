@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Account_users;
 use App\Enums\ConnectionStatus;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 
 class Login extends Controller
@@ -21,7 +22,7 @@ class Login extends Controller
         /* $code = $request->input('code', 'null');
 
         if($code != 'null'){
-            
+
             $Results = Accounts::where('temporary_token',$code)->where('temporary_token_expires_at', '<', \DB::raw('NOW()'));
 
             if(count($Results) == 0){
@@ -61,9 +62,10 @@ class Login extends Controller
                 $Account_users->pivot->save();
                 //dd($Account_users->toArray());
             }
-            /*Http::post('localhost:8000/api/v1/account-connection', [
-            'account_user' => $Account[0]->token,
-        ]);*/
+
+            Http::post(config('app.tablet_domain').'/api/v1/account-connection', [
+                'account_user' => $Account[0]->token,
+            ]);
         } else {
             return view('tokendoesnotexist');
         }

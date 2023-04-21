@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'tablet_domain' => env('TABLET_DOMAIN'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
