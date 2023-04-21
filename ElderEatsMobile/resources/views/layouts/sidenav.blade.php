@@ -2,7 +2,7 @@
 
 
     <div class="flex justify-center bg-banner">
-
-        <img src="{{ asset('Images/logo_schaduw.png') }}" alt="logo" class="w-28 p-2 aspect-square">
+        
+        <img src="{{ asset('Images/logo_schaduw.png') }}" onclick="location.href='{{ url('/') }}'" alt="logo" class="w-28 p-2 aspect-square">
     </div>
 </div>

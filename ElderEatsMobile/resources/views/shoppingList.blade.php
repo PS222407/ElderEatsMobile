@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BoodschappenLijst</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .flex-container {
             display: flex;
@@ -43,19 +45,23 @@
 </head>
 
 <body>
+    <div class=" mx-36">
+        @include('layouts.sidenav')
 
     <h1>BoodschappenLijst</h1>
     <p>product gekocht? vergeet niet af te vinken.</p>
 
-    <div class="flex-container">
+    <div class=" flex  w-full">
+        <div class=" w-full grid grid-cols-3">
 
         @foreach ($products as $product)
-            <div onclick='changecolor({{ $product->id }})'>
+            <div class=" bg-unused m-1 w-90 overflow-hidden relative" onclick='changecolor({{ $product->id }})'>
                 @if (isset($product->image))
+                test
                 @endif
-                <h5 class="vertical">{{ $product->name }}</h5>
+                <h5 class=" left-0">{{ $product->name }}</h5>
                 </td>
-                <div class="vertical2" checkState=0 id='check-{{ $product->id }}'>
+                <div class=" absolute right-0 top-0" checkState=0 id='check-{{ $product->id }}'>
                     <svg fill="#000000" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                         <path
@@ -65,8 +71,9 @@
             </div>
         @endforeach
 
-
+        </div>
     </div>
+</div>
     <script>
         function changecolor(id) {
             var box = document.getElementById("check-" + id);
