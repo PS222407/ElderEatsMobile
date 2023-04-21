@@ -11,10 +11,9 @@
         </main>
         <h3 class="title">Of voer handmatig de code in</h3>
         <div class="connect-field-button">
-        <input placeholder="5-cijferige code" class="connect-field" type="text" id="Code" name="Code" />
-        <button class="connect-button" type="submit"> Verbinden </button>
+            <input placeholder="5-cijferige code" class="connect-field" type="text" id="Code" name="Code"/>
+            <button class="connect-button" type="submit"> Verbinden</button>
         </div>
-
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"
@@ -26,7 +25,7 @@
             qrbox: {
                 width: 250,
                 height: 250,
-        }, // Sets dimensions of scanning box (set relative to reader element width)
+            }, // Sets dimensions of scanning box (set relative to reader element width)
             fps: 20, // Frames per second to attempt a scan
         });
         scanner.render(success, error);
