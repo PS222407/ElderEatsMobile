@@ -1,14 +1,28 @@
 @extends('layouts.bas')
 
 @section('content')
-    <form method="POST" id="requestConnForm" action="{{ route('requestConnection') }}" accept-charset="UTF-8">
-        {{ csrf_field() }}
-        <input type="text" id="Code" name="Code"/>
-        <button type="submit">Verstuur</button>
-        <main>
-            <div id="reader"></div>
-        </main>
-    </form>
+    <div class="mx-3 mt-8">
+        <h1 class="text-2xl text-center font-bold">QR Code scanner</h1>
+        <form method="POST" id="requestConnForm" class="mt-4" action="{{ route('requestConnection') }}" accept-charset="UTF-8">
+            @csrf
+            <div id="reader" class="w-full mx-auto shadow rounded-2xl"></div>
+
+            <p class="italic text-sm text-center">Verbind hier uw telefoon toestel met de inventaris tablet. Dit doe je doormiddel van de QR Code die te vinden is linksboven op de tablet.</p>
+
+            <div class="my-6 flex w-fit mx-auto items-center gap-x-2">
+                <div style="width: 50px; height: 1px; background: gray"></div>
+                <span>Of</span>
+                <div style="width: 50px; height: 1px; background: gray"></div>
+            </div>
+            <div class="flex flex-col w-fit mx-auto">
+                <label for="Code">Code op tablet:</label>
+                <div class="flex">
+                    <input type="text" id="Code" name="Code"/>
+                    <x-primary-button type="submit" class="w-fit rounded-l rounded-r">Verstuur</x-primary-button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"
             integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ=="
@@ -39,5 +53,9 @@
             console.error(err);
             // Prints any errors to the console
         }
+    </script>
+
+    <script>
+        document.getElementById('html5-qrcode-button-camera-permission').innerText = 'Start scanner';
     </script>
 @endsection

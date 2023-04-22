@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [Login::class, 'LoadMenu'])->name('menu');
-    Route::get('inventory', [ProductList::class, 'LoadProducts'])->name('ProductList');
     Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 });
 
@@ -29,7 +28,7 @@ Route::get('shoppingList/{accountIndex}', [ProductList::class, 'GetShoppingList'
 Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
 Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
-Route::view('/Connect', 'Login');
+Route::view('/Connect', 'Login')->name('connect');
 Route::view('/Connectionfailed', 'LoginFailed');
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 

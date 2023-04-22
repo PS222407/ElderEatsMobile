@@ -54,17 +54,28 @@
     width: 140px
 }
 
-main {
+#reader {
+    margin-top: 1em;
+}
+#reader img[alt="Info icon"] {
+    display: none;
+}
+#reader__scan_region {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
-
-#reader {
-    width: 600px;
+#html5-qrcode-button-camera-permission {
+    padding: 1em;
+    background: #519162;
+    color: white;
+    border-radius: .5em;
 }
-
 #result {
     text-align: center;
     font-size: 1.5rem;
+}
+
+
+#html5-qrcode-anchor-scan-type-change {
+    display: none;
 }

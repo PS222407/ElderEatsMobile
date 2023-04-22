@@ -1,27 +1,24 @@
 @extends('layouts.bas')
 
 @section('content')
-    <div class="">
-        @include('layouts.sidenav')
-        <div>
-            <div class=" m-3 overflow-scroll flex-auto">
-
-                @foreach ($products as $product)
-                    <div class=" relative flex">
-                        <div class="flex">
-                            <p>{{ $product->name }}</p>
-                        </div>
-                        <p class=" absolute right-7">--{{ $product->pivot->expiration_date }}</p>
-                        <div class=" absolute right-0">
-                            <img class=" w-6" src="{{ asset('svg/pencil.svg') }}" alt="bewerken"
-                                 onclick="location.href='{{ url('UpdateDate/' . $product->pivot->id . '/' . $accountIndex) }}'"/>
-                        </div>
+    <div class="mt-8 mx-3 ">
+        <h1 class="text-center text-2xl font-bold">Inventaris</h1>
+        <div class="overflow-scroll flex-auto mt-4">
+            <hr class=" h-1 dark:bg-gray-700">
+            @foreach ($products as $product)
+                <div class="py-3 relative flex">
+                    <div class="flex">
+                        <p>
+                            {{ $product->name }} - {{ $product->brand }} - {{ $product->quantity_in_package }}
+                        </p>
                     </div>
-                    <div class=" pb-2">
-                        <hr class=" h-1 dark:bg-gray-700">
-                    </div>
-                @endforeach
-            </div>
+                    <p class=" absolute right-7">--{{ dateShortStringToHumanNL($product->pivot->expiration_date) }}</p>
+                    <a href="{{ url('UpdateDate/' . $product->pivot->id . '/' . $accountIndex) }}" class=" absolute right-0">
+                        <img class=" w-6" src="{{ asset('svg/pencil.svg') }}" alt="bewerken" />
+                    </a>
+                </div>
+                <hr class=" h-1 dark:bg-gray-700">
+            @endforeach
         </div>
     </div>
 @endsection

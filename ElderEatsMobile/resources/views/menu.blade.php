@@ -2,14 +2,13 @@
 
 @section('content')
     <div class="bg-banner h-screen">
-        @include('layouts.sidenav')
         <div class=" flex items-center pb-5 mx-10">
             <p class=" text-gray">apparaat:</p>
             @php
                 $i = 0;
             @endphp
             <form action="/" method="get" name="FormM">
-                <select class=" p-0 pr-8" name="ConnectionNumber" onchange="this.form.submit()">
+                <select class="ml-2 pl-4 pr-12 py-0 rounded" name="ConnectionNumber" onchange="this.form.submit()">
                     @foreach ($accounts as $account)
                         <option value="{{ $i }}" @if ($account->id == $selectedAccount->id) selected @endif>
                             @if (isset($account->name))
@@ -29,12 +28,12 @@
         </div>
         <div class=" flex justify-center">
             <div class="grid grid-cols-1">
-                <a class=" text-white flex justify-center"
+                <a class=" text-white flex justify-center cursor-pointer hover:underline"
                    onclick="location.href='{{ url('ProductList/' . $accountIndex) }}'">
                     Inventaris
                 </a>
 
-                <a class=" text-white flex justify-center"
+                <a class=" text-white flex justify-center  cursor-pointer hover:underline"
                    onclick="location.href='{{ url('shoppingList/' . $accountIndex) }}'">
                     Boodschappenlijst
                 </a>
@@ -46,15 +45,15 @@
         </div>
         <div class=" mt-4 flex justify-center">
             <div class="grid grid-cols-1">
-                <a class=" text-white flex justify-center" onclick="location.href='{{ url('Connect') }}'">
+                <a class=" text-white flex justify-center cursor-pointer hover:underline" onclick="location.href='{{ url('Connect') }}'">
                     Apparaat configureren
                 </a>
 
-                <a class=" text-unused flex justify-center">
+                <a class=" text-unused flex justify-center ">
                     Wijzigen van Account
                 </a>
 
-                <a class=" text-unused text-white flex justify-center">
+                <a class=" text-unused flex justify-center ">
                     Taal
                 </a>
             </div>
@@ -67,11 +66,11 @@
 
         <div class=" mt-4 flex justify-center mb-4">
             <div class="grid grid-cols-1">
-                <a class=" text-unused flex justify-center">
+                <a class=" text-unused flex justify-center ">
                     Help
                 </a>
 
-                <a class=" text-unused flex justify-center">
+                <a class=" text-unused flex justify-center ">
                     Informatie
                 </a>
 
@@ -85,7 +84,7 @@
         </div>
         <div class=" mt-4 flex justify-center">
             <div class="grid grid-cols-1">
-                <a class=" text-white flex justify-center" onclick="location.href='{{ url('logout') }}'">
+                <a class=" text-white flex justify-center  cursor-pointer hover:underline" onclick="location.href='{{ url('logout') }}'">
                     loguit
                 </a>
             </div>
