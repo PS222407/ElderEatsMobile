@@ -13,7 +13,7 @@ class ProductList extends Controller
         if (count($User->Connections) > 0) {
             if ($ConnectionNumber < count($User->Connections)) {
                 $Account = $User->Connections[$ConnectionNumber];
-                $products = $Account->GetProducts;
+                $products = $Account->GetProducts()->wherePivotNull('ran_out_at')->get();
 
                 return view('storedProducts', ['products' => $products, 'accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
             } else {

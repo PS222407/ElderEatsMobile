@@ -25,6 +25,7 @@
         width: 250px;
         height: 250px;
         opacity: 0.2;
+        z-index: -1;
         transform: rotate(15deg);
     }
 </style>
