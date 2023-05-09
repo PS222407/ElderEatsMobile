@@ -20,4 +20,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Account::class, 'account_products');
     }
+    public function GetFixedProducts(int $AccountID){
+
+    }
 }

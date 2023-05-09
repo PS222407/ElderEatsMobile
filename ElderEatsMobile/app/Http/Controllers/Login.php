@@ -29,9 +29,9 @@ class Login extends Controller
             'status' => ConnectionStatus::IN_PROCESS,
         ]);
 
-        Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
+        /*Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
             'account_token' => $account->token,
-        ]);
+        ]);*/
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }

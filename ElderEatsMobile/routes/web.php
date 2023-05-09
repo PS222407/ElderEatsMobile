@@ -28,6 +28,8 @@ Route::get('shoppingList/{accountIndex}', [ProductList::class, 'GetShoppingList'
 Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
 Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
+Route::post('UpdateShoppingList/{accountIndex}', [ProductList::class, 'UpdateShoppingList'])->name('UpdateShoppingList');
+
 Route::view('/Connect', 'Login')->name('connect');
 Route::view('/Connectionfailed', 'LoginFailed');
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');

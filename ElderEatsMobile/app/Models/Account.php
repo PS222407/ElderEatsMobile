@@ -25,6 +25,11 @@ class Account extends Model
     {
         return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date', 'id')->where('account_products.id', '=', $productID)->first();
     }
+
+    public function GetFixedProductsById(int $productID)
+    {
+        return $this->belongsToMany(Product::class, 'fixed_products')->withPivot('is_active', 'id', 'product_id')->where([['product_id', $productID],['account_id', $this->id] ])->first();
+    }
     public function GetFixedProducts()
     {
         return $this->belongsToMany(Product::class, 'fixed_products')->where([['is_active', 1], ['account_id', $this->id]])->get();
