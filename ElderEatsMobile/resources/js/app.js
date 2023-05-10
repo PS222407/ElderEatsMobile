@@ -13,9 +13,13 @@ let linkedAccountsArray = JSON.parse(linkedAccountsId);
 linkedAccountsArray.forEach((accountid) => {
     Echo.channel('product-scanned-channel-' + accountid)
         .listen('.add-product', (e) => {
-            Push.create("Boodschappen aan de voorraad toegevoegd.", {
-                body: "Voeg zo snel mogelijk een datum toe.",
-                icon: '/Images/logo_schaduw_32x.png',
-            });
+            if (e.needsToSendNotification) {
+                Push.create(`Apparaat ${e.accountId} heeft boodschappen aan de voorraad toegevoegd.`, {
+                    body: "Voeg zo snel mogelijk een datum toe.",
+                    icon: '/Images/logo_schaduw.png',
+                });
+            } else {
+                console.log("Er is al een notificatie gestuurd onlangs.")
+            }
         });
 })
