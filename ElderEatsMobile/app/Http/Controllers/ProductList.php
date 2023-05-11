@@ -11,18 +11,20 @@ class ProductList extends Controller
 {
     public function LoadProducts()
     {
-        if (!isNull(Session::get('AccountIndex'))) {
-            $ConnectionNumber = Session::get('AccountIndex');
-        } else {
-            $ConnectionNumber = 0;
+
+        if(Session::exists('AccountIndex')){
+            $accountIndex = Session::get('AccountIndex');
+        }else{
+            $accountIndex = 0;
         }
+
         $User = Auth::user();
         if (count($User->Connections) > 0) {
-            if ($ConnectionNumber < count($User->Connections)) {
-                $Account = $User->Connections[$ConnectionNumber];
+            if ($accountIndex < count($User->Connections)) {
+                $Account = $User->Connections[$accountIndex];
                 $products = $Account->GetProducts()->wherePivotNull('ran_out_at')->get();
 
-                return view('storedProducts', ['products' => $products, 'accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
+                return view('storedProducts', ['products' => $products, 'accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $accountIndex]);
             } else {
                 //TODO: error connection nummer to high
             }
@@ -62,11 +64,15 @@ class ProductList extends Controller
 
     public function GetShoppingList()
     {
-        if (!isNull(Session::get('AccountIndex'))) {
+
+        if(Session::exists('AccountIndex')){
             $accountIndex = Session::get('AccountIndex');
-        } else {
+        }else{
             $accountIndex = 0;
         }
+
+
+
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)) {
             $Account = $User->Connections[0];

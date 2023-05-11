@@ -68,13 +68,12 @@ class Login extends Controller
     { //session()->regenerate();
         $ConnectionNumber = $request->input('ConnectionNumber', -1);
         if ($ConnectionNumber >= 0) {
+            ///dd('test');
             Session::put(['AccountIndex' => $ConnectionNumber]);
         } else {
-            if (!isNull(Session::get('AccountIndex'))) {
+            //if (!isNull(Session::get('AccountIndex'))) {
                 $ConnectionNumber = Session::get('AccountIndex');
-            } else {
-                $ConnectionNumber = 0;
-            }
+            //}
         }
         //session()->save();
         Session::save();
