@@ -25,8 +25,6 @@
             }
             if (response.pivot.status == 1) {
 
-                console.log(':)');
-
                 setTimeout(function() {
                     Data();
                 }, 1000);
