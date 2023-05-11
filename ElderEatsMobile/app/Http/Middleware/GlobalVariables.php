@@ -11,7 +11,7 @@ class GlobalVariables
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $accounts = auth()->user()?->accounts->pluck('id');
+        $accounts = auth()->user()?->connectedAccounts->pluck('id');
         View::share('linkedAccounts', $accounts);
 
         return $next($request);
