@@ -10,6 +10,12 @@ Alpine.start();
 let linkedAccountsId = document.querySelector('meta[name="linked-accounts"]').content;
 let linkedAccountsArray = JSON.parse(linkedAccountsId);
 
+let test =  Math.floor(Math.random() * 10);
+
+Push.create(`Test message ${test}`, {
+    body: "Hey hoi hallo.",
+});
+
 linkedAccountsArray?.forEach((accountid) => {
     Echo.channel('product-scanned-channel-' + accountid)
         .listen('.add-product', (e) => {
