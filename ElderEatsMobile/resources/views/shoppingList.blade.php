@@ -4,8 +4,10 @@
     <h1 class="text-2xl text-center font-bold mt-10">BoodschappenLijst</h1>
     <p class="text-center italic uppercase text-hamburger w-3/4 mx-auto">product gekocht? vergeet niet af te vinken.</p>
 
+    <div class="flex items-center justify-center">
         <button onclick="SubmitChange()" class=" bg-banner rounded-xl w-32 text-green-50"> opslaan </button>
-    <div class="flex mt-5">
+    </div>
+        <div class="flex mt-5">
         <div class="grid grid-cols-2 mx-3 gap-3 w-full">
             @foreach ($products as $product)
                 <div class="relative">
@@ -62,13 +64,13 @@
         }
         async function SubmitChange(){
 
-                //Logic goes here
+            //Logic goes here
 
-                //alert("test")
+            //alert("test")
             const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
 
-            await fetch(`{{ url('UpdateShoppingList/'.$accountIndex) }}`, {
+            await fetch(`{{ url('UpdateShoppingList') }}`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

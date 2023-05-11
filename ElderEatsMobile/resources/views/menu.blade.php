@@ -29,12 +29,12 @@
         <div class=" flex justify-center">
             <div class="grid grid-cols-1">
                 <a class=" text-white flex justify-center cursor-pointer hover:underline"
-                   onclick="location.href='{{ url('ProductList/' . $accountIndex) }}'">
+                   onclick="location.href='{{ url('ProductList') }}'">
                     Inventaris
                 </a>
 
                 <a class=" text-white flex justify-center  cursor-pointer hover:underline"
-                   onclick="location.href='{{ url('shoppingList/' . $accountIndex) }}'">
+                   onclick="location.href='{{ url('shoppingList') }}'">
                     Boodschappenlijst
                 </a>
             </div>

@@ -13,7 +13,7 @@
                         </p>
                     </div>
                     <p class=" absolute right-7">--{{ dateShortStringToHumanNL($product->pivot->expiration_date) }}</p>
-                    <a href="{{ url('UpdateDate/' . $product->pivot->id . '/' . $accountIndex) }}" class=" absolute right-0">
+                    <a href="{{ url('UpdateDate/' . $product->pivot->id) }}" class=" absolute right-0">
                         <img class=" w-6" src="{{ asset('svg/pencil.svg') }}" alt="bewerken" />
                     </a>
                 </div>

@@ -21,14 +21,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 });
 
-Route::get('ProductList/{ConnectionNumber}', [ProductList::class, 'LoadProducts'])->name('ProductList');
-Route::get('UpdateDate/{productaccountid}/{accountIndex}', [ProductList::class, 'updateDate'])->name('Update');
-Route::get('shoppingList/{accountIndex}', [ProductList::class, 'GetShoppingList'])->name('shoppingList');
+Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
+Route::get('UpdateDate/{productaccountid}/', [ProductList::class, 'updateDate'])->name('Update');
+Route::get('shoppingList', [ProductList::class, 'GetShoppingList'])->name('shoppingList');
 
 Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
-Route::post('UpdateDatePost/{productaccountid}/{accountIndex}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
-Route::post('UpdateShoppingList/{accountIndex}', [ProductList::class, 'UpdateShoppingList'])->name('UpdateShoppingList');
+Route::post('UpdateDatePost/{productaccountid}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
+Route::post('UpdateShoppingList', [ProductList::class, 'UpdateShoppingList'])->name('UpdateShoppingList');
 
 Route::view('/Connect', 'Login')->name('connect');
 Route::view('/Connectionfailed', 'LoginFailed');

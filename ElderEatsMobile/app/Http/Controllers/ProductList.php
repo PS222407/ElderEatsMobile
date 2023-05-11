@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProductList extends Controller
 {
-    public function LoadProducts(int $ConnectionNumber)
+    public function LoadProducts()
     {
+        $ConnectionNumber = Session::get('AccountIndex');
+
         $User = Auth::user();
         if (count($User->Connections) > 0) {
             if ($ConnectionNumber < count($User->Connections)) {
@@ -24,8 +27,10 @@ class ProductList extends Controller
         }
     }
 
-    public function updateDate(int $productID, int $accountIndex)
+    public function updateDate(int $productID)
     {
+        $accountIndex = Session::get('AccountIndex');
+
         $User = Auth::user();
         if (count($User->Connections) > 0) {
             $Account = $User->Connections[$accountIndex];
@@ -34,8 +39,10 @@ class ProductList extends Controller
         }
     }
 
-    public function UpdateDatePost(Request $request, int $productID, int $accountIndex)
+    public function UpdateDatePost(Request $request, int $productID)
     {
+        $accountIndex = Session::get('AccountIndex');
+        
         $Date = $request->input('datetime');
         $User = Auth::user();
 
@@ -46,11 +53,13 @@ class ProductList extends Controller
             $product->pivot->save();
         }
 
-        return redirect()->route('ProductList', ['ConnectionNumber' => $accountIndex]);
+        return redirect()->route('ProductList');
     }
 
-    public function GetShoppingList(int $accountIndex)
+    public function GetShoppingList()
     {
+        $accountIndex = Session::get('AccountIndex');
+
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)) {
             $Account = $User->Connections[0];
@@ -61,8 +70,9 @@ class ProductList extends Controller
         return view('shoppingList', ['products' => $Account->GetFixedProducts(),'accountIndex' => $accountIndex]);
     }
 
-    public function UpdateShoppingList(Request $request, int $accountIndex){
+    public function UpdateShoppingList(Request $request){
 
+        $accountIndex = Session::get('AccountIndex');
         //dd($request->all());
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)) {

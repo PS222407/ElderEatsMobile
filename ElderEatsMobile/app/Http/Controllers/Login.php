@@ -10,7 +10,7 @@ use App\Models\Account_users;
 use App\Enums\ConnectionStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Session;
 
 class Login extends Controller
 {
@@ -60,10 +60,21 @@ class Login extends Controller
     }
 
     public function LoadMenu(Request $request)
-    {
-        $ConnectionNumber = $request->input('ConnectionNumber', 0);
+    {//session()->regenerate();
+        $ConnectionNumber = $request->input('ConnectionNumber', -76);
+        if($ConnectionNumber >= 0){
+            Session::put(['AccountIndex' => $ConnectionNumber]);
+        }else{
+            $ConnectionNumber = Session::get('AccountIndex');
+        }
+        //session()->save();
+        Session::save();
         $User = Auth::user();
         if (count($User->Connections) > 0) {
+            if(count($User->Connections) < $ConnectionNumber){
+                Session::put(['AccountIndex' => 1]);
+                $ConnectionNumber=0;
+            }
             $Account = $User->Connections[$ConnectionNumber];
 
             return view('menu', ['accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
