@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\ConnectionStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,6 +57,10 @@ class User extends Authenticatable
     public function accounts(): BelongsToMany
     {
         return $this->belongsToMany(Account::class, 'account_users');
+    }
+    public function connectedAccounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Account::class, 'account_users')->wherePivot('status', ConnectionStatus::CONNECTED)->withTimestamps();
     }
     public function GetConnections(): BelongsToMany
     {
