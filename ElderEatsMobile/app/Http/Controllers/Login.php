@@ -65,24 +65,24 @@ class Login extends Controller
     }
 
     public function LoadMenu(Request $request)
-    {//session()->regenerate();
+    { //session()->regenerate();
         $ConnectionNumber = $request->input('ConnectionNumber', -1);
-        if($ConnectionNumber >= 0){
+        if ($ConnectionNumber >= 0) {
             Session::put(['AccountIndex' => $ConnectionNumber]);
-        }else{
-            if(!isNull(Session::get('AccountIndex'))){
-            $ConnectionNumber = Session::get('AccountIndex');
-            }else{
-            $ConnectionNumber = 0;
+        } else {
+            if (!isNull(Session::get('AccountIndex'))) {
+                $ConnectionNumber = Session::get('AccountIndex');
+            } else {
+                $ConnectionNumber = 0;
             }
         }
         //session()->save();
         Session::save();
         $User = Auth::user();
         if (count($User->Connections) > 0) {
-            if(count($User->Connections) < $ConnectionNumber){
+            if (count($User->Connections) < $ConnectionNumber) {
                 Session::put(['AccountIndex' => 1]);
-                $ConnectionNumber=0;
+                $ConnectionNumber = 0;
             }
             $Account = $User->Connections[$ConnectionNumber];
 

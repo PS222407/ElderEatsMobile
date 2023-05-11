@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use function PHPUnit\Framework\isNull;
 
 class ProductList extends Controller
 {
     public function LoadProducts()
     {
-        $ConnectionNumber = Session::get('AccountIndex');
-
+        if (!isNull(Session::get('AccountIndex'))) {
+            $ConnectionNumber = Session::get('AccountIndex');
+        } else {
+            $ConnectionNumber = 0;
+        }
         $User = Auth::user();
         if (count($User->Connections) > 0) {
             if ($ConnectionNumber < count($User->Connections)) {
@@ -42,7 +46,7 @@ class ProductList extends Controller
     public function UpdateDatePost(Request $request, int $productID)
     {
         $accountIndex = Session::get('AccountIndex');
-        
+
         $Date = $request->input('datetime');
         $User = Auth::user();
 
@@ -58,8 +62,11 @@ class ProductList extends Controller
 
     public function GetShoppingList()
     {
-        $accountIndex = Session::get('AccountIndex');
-
+        if (!isNull(Session::get('AccountIndex'))) {
+            $accountIndex = Session::get('AccountIndex');
+        } else {
+            $accountIndex = 0;
+        }
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)) {
             $Account = $User->Connections[0];
@@ -67,10 +74,11 @@ class ProductList extends Controller
             $Account = $User->Connections[$accountIndex];
         }
 
-        return view('shoppingList', ['products' => $Account->GetFixedProducts(),'accountIndex' => $accountIndex]);
+        return view('shoppingList', ['products' => $Account->GetFixedProducts(), 'accountIndex' => $accountIndex]);
     }
 
-    public function UpdateShoppingList(Request $request){
+    public function UpdateShoppingList(Request $request)
+    {
 
         $accountIndex = Session::get('AccountIndex');
         //dd($request->all());
@@ -79,11 +87,11 @@ class ProductList extends Controller
             $Account = $User->Connections[0];
         } else {
             $Account = $User->Connections[$accountIndex];
-        } 
+        }
         $data = $request->all();
 
-        foreach ( $data as $k=>$v) {
-            
+        foreach ($data as $k => $v) {
+
             $product = $Account->GetFixedProductsById($k);
             $product->pivot->is_active = $v;
             $product->pivot->save();
