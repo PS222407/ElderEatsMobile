@@ -35,8 +35,11 @@ class ProductList extends Controller
 
     public function updateDate(int $productID)
     {
-        $accountIndex = Session::get('AccountIndex');
-
+        if(Session::exists('AccountIndex')){
+            $accountIndex = Session::get('AccountIndex');
+        }else{
+            $accountIndex = 0;
+        }
         $User = Auth::user();
         if (count($User->Connections) > 0) {
             $Account = $User->Connections[$accountIndex];
@@ -47,8 +50,11 @@ class ProductList extends Controller
 
     public function UpdateDatePost(Request $request, int $productID)
     {
-        $accountIndex = Session::get('AccountIndex');
-
+        if(Session::exists('AccountIndex')){
+            $accountIndex = Session::get('AccountIndex');
+        }else{
+            $accountIndex = 0;
+        }
         $Date = $request->input('datetime');
         $User = Auth::user();
 
@@ -86,7 +92,11 @@ class ProductList extends Controller
     public function UpdateShoppingList(Request $request)
     {
 
-        $accountIndex = Session::get('AccountIndex');
+        if(Session::exists('AccountIndex')){
+            $accountIndex = Session::get('AccountIndex');
+        }else{
+            $accountIndex = 0;
+        }
         //dd($request->all());
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)) {
