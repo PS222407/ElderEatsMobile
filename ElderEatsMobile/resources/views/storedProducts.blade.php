@@ -9,7 +9,7 @@
                 <div class="py-3 relative flex">
                     <div class="flex ">
                         <p class=" flex-wrap w-56">
-                            {{ $product->name }} - {{ $product->brand }} - x{{ $product->quantity_in_package }}
+                            {{ $product->full_name }}
                         </p>
                     </div>
                     <p class=" absolute right-7">--{{ dateShortStringToHumanNL($product->pivot->expiration_date) }}</p>
