@@ -10,7 +10,7 @@ Alpine.start();
 let linkedAccountsId = document.querySelector('meta[name="linked-accounts"]').content;
 let linkedAccountsArray = JSON.parse(linkedAccountsId);
 
-linkedAccountsArray.forEach((accountid) => {
+linkedAccountsArray?.forEach((accountid) => {
     Echo.channel('product-scanned-channel-' + accountid)
         .listen('.add-product', (e) => {
             if (e.needsToSendNotification) {

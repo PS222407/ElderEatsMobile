@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Account_users;
 use App\Enums\ConnectionStatus;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -31,9 +32,11 @@ class Login extends Controller
             'status' => ConnectionStatus::IN_PROCESS,
         ]);
 
-        /*Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
-            'account_token' => $account->token,
-        ]);*/
+        if (App::environment('production')) {
+            Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
+                'account_token' => $account->token,
+            ]);
+        }
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }
