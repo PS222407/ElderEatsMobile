@@ -83,7 +83,7 @@ class Login extends Controller
         $User = Auth::user();
         if (count($User->Connections) > 0) {
             if (count($User->Connections) < $ConnectionNumber) {
-                Session::put(['AccountIndex' => 1]);
+                Session::put(['AccountIndex' => 0]);
                 $ConnectionNumber = 0;
             }
             $Account = $User->Connections[$ConnectionNumber];
