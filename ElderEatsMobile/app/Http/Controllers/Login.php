@@ -72,8 +72,11 @@ class Login extends Controller
             Session::put(['AccountIndex' => $ConnectionNumber]);
         } else {
             //if (!isNull(Session::get('AccountIndex'))) {
+            if (Session::exists('AccountIndex')) {
                 $ConnectionNumber = Session::get('AccountIndex');
-            //}
+            } else {
+                $ConnectionNumber = 0;
+            }
         }
         //session()->save();
         Session::save();
