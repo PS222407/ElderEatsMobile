@@ -1,20 +1,6 @@
 @extends('layouts.bas')
 
 @section('content')
-
-    <button class="py-3 px-5 bg-hamburger text-white rounded"
-            onclick="document.dispatchEvent(new CustomEvent('permission-button-pressed'))">
-        permission
-    </button>
-    <button class="py-3 px-5 bg-hamburger text-white rounded"
-            onclick="document.dispatchEvent(new CustomEvent('send-notification-button-pressed'))">
-        send notification
-    </button>
-    <button class="py-3 px-5 bg-hamburger text-white rounded"
-            onclick="document.dispatchEvent(new CustomEvent('read-notification-permissions-button-pressed'))">
-        log permissions
-    </button>
-
     <div class="mt-8 mx-3 ">
         <h1 class="text-center text-2xl font-bold">Inventaris</h1>
         <div class="overflow-scroll flex-auto mt-4">
