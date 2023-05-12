@@ -11,11 +11,7 @@
                 <select class="ml-2 pl-4 pr-12 py-0 rounded" name="ConnectionNumber" onchange="this.form.submit()">
                     @foreach ($accounts as $account)
                         <option value="{{ $i }}" @if ($account->id == $selectedAccount->id) selected @endif>
-                            @if (isset($account->name))
-                                {{ $i + 1 . ': ' . $account->name }}
-                            @else
-                                {{ $i + 1 }}
-                            @endif
+                            {{ $account->name ?? $i + 1 }}
                         </option>
                         {{ $i++ }}
                     @endforeach
