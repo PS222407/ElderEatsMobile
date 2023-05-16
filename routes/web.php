@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Login;
-use App\Http\Controllers\ProductList;
+use App\Http\Controllers\InventoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,14 +21,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 });
 
-Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
-Route::get('UpdateDate/{productaccountid}/', [ProductList::class, 'updateDate'])->name('Update');
-Route::get('shoppingList', [ProductList::class, 'GetShoppingList'])->name('shoppingList');
-
 Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
-Route::post('UpdateDatePost/{productaccountid}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
-Route::post('UpdateShoppingList', [ProductList::class, 'UpdateShoppingList'])->name('UpdateShoppingList');
+
+Route::get('inventaris', [InventoryController::class, 'index'])->name('inventory.index');
+Route::get('shoppingList', [InventoryController::class, 'GetShoppingList'])->name('shoppingList');
+Route::post('UpdateShoppingList', [InventoryController::class, 'UpdateShoppingList'])->name('UpdateShoppingList');
+Route::get('inventaris/{productID}/', [InventoryController::class, 'edit'])->name('inventaris.edit');
+Route::post('inventaris/{productID}', [InventoryController::class, 'update'])->name('inventaris.update');
 
 Route::view('/Connect', 'Login')->name('connect');
 Route::view('/Connectionfailed', 'LoginFailed');

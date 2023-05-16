@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Account;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class Product extends Model
@@ -17,7 +17,7 @@ class Product extends Model
         'barcode ',
     ];
 
-    public function accounts()
+    public function accounts(): BelongsToMany
     {
         return $this->belongsToMany(Account::class, 'account_products');
     }

@@ -25,7 +25,7 @@
         <div class=" flex justify-center">
             <div class="grid grid-cols-1">
                 <a class=" text-white flex justify-center cursor-pointer hover:underline"
-                   onclick="location.href='{{ url('ProductList') }}'">
+                   href="{{ route('inventory.index') }}">
                     Inventaris
                 </a>
 

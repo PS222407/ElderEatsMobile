@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use function PHPUnit\Framework\isNull;
 
-class ProductList extends Controller
+class InventoryController extends Controller
 {
-    public function LoadProducts()
+    public function index()
     {
-
         if(Session::exists('AccountIndex')){
             $accountIndex = Session::get('AccountIndex');
         }else{
@@ -33,7 +32,7 @@ class ProductList extends Controller
         }
     }
 
-    public function updateDate(int $productID)
+    public function edit(int $productID)
     {
         if(Session::exists('AccountIndex')){
             $accountIndex = Session::get('AccountIndex');
@@ -48,24 +47,28 @@ class ProductList extends Controller
         }
     }
 
-    public function UpdateDatePost(Request $request, int $productID)
+    public function update(Request $request, int $productID)
     {
+        $request->validate([
+            'datetime' => ['nullable', 'date', 'max:10'],
+        ]);
+
         if(Session::exists('AccountIndex')){
             $accountIndex = Session::get('AccountIndex');
         }else{
             $accountIndex = 0;
         }
-        $Date = $request->input('datetime');
+
         $User = Auth::user();
 
         if (count($User->Connections) > 0) {
             $Account = $User->Connections[$accountIndex];
             $product = $Account->GetProductsById($productID);
-            $product->pivot->expiration_date = $Date;
+            $product->pivot->expiration_date = $request->datetime;
             $product->pivot->save();
         }
 
-        return redirect()->route('ProductList');
+        return redirect()->route('inventory.index');
     }
 
     public function GetShoppingList()
@@ -76,8 +79,6 @@ class ProductList extends Controller
         }else{
             $accountIndex = 0;
         }
-
-
 
         $User = Auth::user();
         if ($accountIndex > count($User->Connections)) {
