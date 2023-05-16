@@ -23,16 +23,13 @@ class DatabaseSeeder extends Seeder
             $user->accounts()->attach($accounts->random(rand(1, 4))->pluck('id')->toArray());
         });
         Product::all()->each(function ($Product) use ($accounts) {
+            $val = rand(1, 4);
 
-                $val = rand(1, 4);
-
-                if($val == 3){
-                $Product->accounts()->attach($accounts->random(rand(1, 40))->pluck('id')->toArray(), ['expiration_date' => date('Y-m-d', strtotime( '+'.mt_rand(0,30).' days'))]);
-                }else{
-                    $Product->accounts()->attach($accounts->random(rand(1, 40))->pluck('id')->toArray());
-                }
-            });
-
-        
+            if($val == 3) {
+                $Product->accounts()->attach($accounts->random(rand(1, 40))->pluck('id')->toArray(), ['expiration_date' => date('Y-m-d', strtotime('+'.mt_rand(0, 30).' days'))]);
+            } else {
+                $Product->accounts()->attach($accounts->random(rand(1, 40))->pluck('id')->toArray());
+            }
+        });
     }
 }

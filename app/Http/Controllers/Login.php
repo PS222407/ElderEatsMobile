@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-
 use App\Models\Account;
 use App\Models\Account_users;
 use App\Enums\ConnectionStatus;
@@ -89,8 +87,7 @@ class Login extends Controller
             $Account = $User->Connections[$ConnectionNumber];
 
             return view('menu', ['accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
-        } else {
-            return view("noAccountConnection");
         }
+        return view('noAccountConnection');
     }
 }

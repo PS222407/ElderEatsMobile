@@ -60,7 +60,7 @@
 
             ChangedData[id] = stateConvertForDatabase;
 
-                
+
         }
         async function SubmitChange(){
 
@@ -79,12 +79,12 @@
                     },
                     body: JSON.stringify(ChangedData),
                 })
-                
+
                 location.reload();
-                
+
             }
-        
-        
+
+
 
 
 

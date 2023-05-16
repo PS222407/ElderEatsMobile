@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-
 class Product extends Model
 {
     use HasFactory;
@@ -24,7 +23,7 @@ class Product extends Model
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn() => implode(' - ', array_filter([$this->name, $this->brand, $this->quantity_in_package])),
+            get: fn () => implode(' - ', array_filter([$this->name, $this->brand, $this->quantity_in_package])),
         );
     }
 }

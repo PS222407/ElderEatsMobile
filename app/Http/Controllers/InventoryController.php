@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use function PHPUnit\Framework\isNull;
 
 class InventoryController extends Controller
 {
     public function index()
     {
-        if(Session::exists('AccountIndex')){
+        if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
-        }else{
+        } else {
             $accountIndex = 0;
         }
 
@@ -24,19 +23,18 @@ class InventoryController extends Controller
                 $products = $Account->GetProducts()->wherePivotNull('ran_out_at')->get();
 
                 return view('storedProducts', ['products' => $products, 'accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $accountIndex]);
-            } else {
-                //TODO: error connection nummer to high
             }
+        //TODO: error connection nummer to high
         } else {
-            return view("noAccountConnection");
+            return view('noAccountConnection');
         }
     }
 
     public function edit(int $productID)
     {
-        if(Session::exists('AccountIndex')){
+        if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
-        }else{
+        } else {
             $accountIndex = 0;
         }
         $User = Auth::user();
@@ -53,9 +51,9 @@ class InventoryController extends Controller
             'datetime' => ['nullable', 'date', 'max:10'],
         ]);
 
-        if(Session::exists('AccountIndex')){
+        if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
-        }else{
+        } else {
             $accountIndex = 0;
         }
 
@@ -73,10 +71,9 @@ class InventoryController extends Controller
 
     public function GetShoppingList()
     {
-
-        if(Session::exists('AccountIndex')){
+        if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
-        }else{
+        } else {
             $accountIndex = 0;
         }
 
@@ -92,10 +89,9 @@ class InventoryController extends Controller
 
     public function UpdateShoppingList(Request $request)
     {
-
-        if(Session::exists('AccountIndex')){
+        if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
-        }else{
+        } else {
             $accountIndex = 0;
         }
         //dd($request->all());
@@ -108,7 +104,6 @@ class InventoryController extends Controller
         $data = $request->all();
 
         foreach ($data as $k => $v) {
-
             $product = $Account->GetFixedProductsById($k);
             $product->pivot->is_active = $v;
             $product->pivot->save();
