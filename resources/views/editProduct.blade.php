@@ -4,7 +4,7 @@
     <div class="mt-8 mx-3">
         <h1 class="font-bold text-center">Wijzig product: {{ $product->full_name }}</h1>
 
-        <form method="POST" class="mt-3" action="{{ route('inventaris.update', $product->pivot->id) }}" accept-charset="UTF-8">
+        <form method="POST" class="mt-3" action="{{ route('inventory.update', $product->pivot->id) }}" accept-charset="UTF-8">
             @csrf
             <div class="flex flex-col">
                 <label for="date">Houdbaarheidsdatum</label>

@@ -30,7 +30,7 @@
                 </a>
 
                 <a class=" text-white flex justify-center  cursor-pointer hover:underline"
-                   onclick="location.href='{{ url('shoppingList') }}'">
+                   href="{{ route('shopping-list.index') }}">
                     Boodschappenlijst
                 </a>
             </div>
@@ -41,7 +41,7 @@
         </div>
         <div class=" mt-4 flex justify-center">
             <div class="grid grid-cols-1">
-                <a class=" text-white flex justify-center cursor-pointer hover:underline" onclick="location.href='{{ url('Connect') }}'">
+                <a class=" text-white flex justify-center cursor-pointer hover:underline" onclick="location.href='{{ route('connect') }}'">
                     Apparaat configureren
                 </a>
 
@@ -80,7 +80,7 @@
         </div>
         <div class=" mt-4 flex justify-center">
             <div class="grid grid-cols-1">
-                <a class=" text-white flex justify-center  cursor-pointer hover:underline" onclick="location.href='{{ url('logout') }}'">
+                <a class=" text-white flex justify-center  cursor-pointer hover:underline" onclick="location.href='{{ route('logout') }}'">
                     loguit
                 </a>
             </div>

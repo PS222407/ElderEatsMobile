@@ -70,7 +70,7 @@
             const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
 
-            await fetch(`{{ url('UpdateShoppingList') }}`, {
+            await fetch(`{{ route('shopping-list.update') }}`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

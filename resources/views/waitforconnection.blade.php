@@ -30,7 +30,7 @@
                 }, 1000);
             }
             if (response.pivot.status == 2) {
-                location.href = '{{ url('/Connectionfailed') }}';
+                location.href = '{{ route('connection-failed') }}';
             }
             //if(response.pivot.updated_at )
         }
