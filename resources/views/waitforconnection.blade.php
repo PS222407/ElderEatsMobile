@@ -6,7 +6,7 @@
         const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
         function Data() {
-            fetch(`{{ url('waitForConnection/' . $accountID) }}`, {
+            fetch(`{{ route('login.wait-for-response', $accountID) }}`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -21,7 +21,7 @@
         function Process(response) {
             console.log(JSON.stringify(response));
             if (response.pivot.status == 0) {
-                location.href = '{{ url('/') }}';
+                location.href = '/';
             }
             if (response.pivot.status == 1) {
 
