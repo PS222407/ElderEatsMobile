@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-
 use App\Models\Account;
 use App\Models\Account_users;
 use App\Enums\ConnectionStatus;
@@ -12,8 +10,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
-
-use function PHPUnit\Framework\isNull;
 
 class Login extends Controller
 {
@@ -41,17 +37,13 @@ class Login extends Controller
         return view('waitforconnection', ['accountID' => $account->id]);
     }
 
-    public function waitForResponse(Request $request, int $accountID)
+    public function waitForResponse(int $accountID)
     {
-        //    'id','account_id','user_id','status',
         $User = Auth::user();
-        $Account = Account::where('id', '=', $accountID)->first();
         $Account_users = $User->GetConnections()->where([['account_id', $accountID], ['user_id', $User->id]])->first();
 
-        //$connection = Account::where('id', '=', $accountID
         $data = $Account_users;
-        //$connection
-        return response()->json($data, 200);
+        return response()->json($data);
     }
 
     public function LogoutUser(Request $request)
@@ -65,20 +57,17 @@ class Login extends Controller
     }
 
     public function LoadMenu(Request $request)
-    { //session()->regenerate();
+    {
         $ConnectionNumber = $request->input('ConnectionNumber', -1);
         if ($ConnectionNumber >= 0) {
-            ///dd('test');
             Session::put(['AccountIndex' => $ConnectionNumber]);
         } else {
-            //if (!isNull(Session::get('AccountIndex'))) {
             if (Session::exists('AccountIndex')) {
                 $ConnectionNumber = Session::get('AccountIndex');
             } else {
                 $ConnectionNumber = 0;
             }
         }
-        //session()->save();
         Session::save();
         $User = Auth::user();
         if (count($User->Connections) > 0) {
@@ -89,8 +78,7 @@ class Login extends Controller
             $Account = $User->Connections[$ConnectionNumber];
 
             return view('menu', ['accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
-        } else {
-            return view("noAccountConnection");
         }
+        return view('noAccountConnection');
     }
 }

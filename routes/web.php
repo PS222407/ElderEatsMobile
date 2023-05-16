@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Login;
-use App\Http\Controllers\ProductList;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ShoppingListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,17 +22,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('requestConnection', [Login::class, 'RequestConnection'])->name('requestConnection');
 });
 
-Route::get('ProductList', [ProductList::class, 'LoadProducts'])->name('ProductList');
-Route::get('UpdateDate/{productaccountid}/', [ProductList::class, 'updateDate'])->name('Update');
-Route::get('shoppingList', [ProductList::class, 'GetShoppingList'])->name('shoppingList');
-
 Route::get('logout', [Login::class, 'LogoutUser'])->name('logout');
 Route::post('waitForConnection/{accountID}', [Login::class, 'waitForResponse'])->name('waitForConnection');
-Route::post('UpdateDatePost/{productaccountid}', [ProductList::class, 'UpdateDatePost'])->name('UpdateDatePost');
-Route::post('UpdateShoppingList', [ProductList::class, 'UpdateShoppingList'])->name('UpdateShoppingList');
 
-Route::view('/Connect', 'Login')->name('connect');
-Route::view('/Connectionfailed', 'LoginFailed');
+Route::get('shopping-list', [ShoppingListController::class, 'index'])->name('shopping-list.index');
+Route::post('shopping-list', [ShoppingListController::class, 'update'])->name('shopping-list.update');
+
+Route::get('inventory', [InventoryController::class, 'index'])->name('inventory.index');
+Route::get('inventory/{productID}/', [InventoryController::class, 'edit'])->name('inventory.edit');
+Route::post('inventory/{productID}', [InventoryController::class, 'update'])->name('inventory.update');
+
+Route::view('/connect', 'Login')->name('connect');
+Route::view('/connection-failed', 'LoginFailed')->name('connection-failed');
+
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -11,6 +11,5 @@ class account_products extends Model
 
     protected $fillable = [
         'id', 'account_id', 'product_id', 'expiration_date',
-
     ];
 }
