@@ -1,7 +1,19 @@
 @extends('layouts.bas')
 
 @section('content')
-    <div class="bg-banner h-screen">
+    <div>
+        <div>
+            <img src="/Images/ElderEating.jpg" class="w-full h-96 object-cover">
+        </div>
+
+        <div class="px-10 pt-5">
+            <h1 class="text-4xl font-medium">Welkom bij ElderEats</h1>
+            <p class="pt-4 text-lg">Met deze mobiele applicatie kun je de producten inzien van de ouderen. Ook kun je met deze app producten aanmaken.</p>
+        </div>
+    </div>
+
+
+   {{-- <div class="bg-banner h-screen">
         <div class=" flex items-center pb-5 mx-10">
             <p class=" text-gray">apparaat:</p>
             @php
@@ -85,5 +97,5 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>--}}
 @endsection
