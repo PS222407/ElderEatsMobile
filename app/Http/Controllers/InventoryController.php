@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use function PHPUnit\Framework\isNan;
+use function PHPUnit\Framework\isNull;
+
 class InventoryController extends Controller
 {
     public function index()
@@ -41,7 +44,11 @@ class InventoryController extends Controller
         if (count($User->Connections) > 0) {
             $Account = $User->Connections[$accountIndex];
 
+            if(!is_null($Account->GetProductsById($productID))){
             return view('editProduct', ['product' => $Account->GetProductsById($productID), 'accountIndex' => $accountIndex]);
+            }else{
+                return view('Productdoesnotexist');
+            }
         }
     }
 
