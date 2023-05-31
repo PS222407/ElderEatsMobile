@@ -18,5 +18,13 @@
                 <a href="{{ route('inventory.index') }}" class="w-full mt-2 rounded-full text-center">Ga terug </a>
             </div>
         </form>
+        @if(!isset($product->image))
+
+        <h2 class="font-bold text-center mt-10">lijkt er op dat er nog geen foto voor dit product bestaat. u kunt deze toevoegen als u wilt</h2>
+
+        <a href="{{ route('Product-image' , $product->id) }}" class="w-full mt-2 rounded-full text-center">Voegtoe</a>
+    
+        @endif
     </div>
+
 @endsection

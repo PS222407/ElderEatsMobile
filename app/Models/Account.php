@@ -21,7 +21,7 @@ class Account extends Model
         return $this->belongsToMany(Product::class, 'account_products')->withPivot('ran_out_at', 'expiration_date', 'id')->orderBy('expiration_date');
         //return Account_Products::where('account_id', $this->id)->get();
     }
-    public function GetProductsById(int $productID)
+    public function GetProductsByConnectionId(int $productID)
     {
         return $this->belongsToMany(Product::class, 'account_products')->withPivot('expiration_date', 'id')->where('account_products.id', '=', $productID)->first();
     }

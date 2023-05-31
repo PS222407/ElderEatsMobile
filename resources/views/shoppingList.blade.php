@@ -12,6 +12,7 @@
             @foreach ($products as $product)
                 <div class="relative">
                     <div class="flex flex-col h-full rounded-xl border-gray border m-1 w-90 overflow-hidden shadow-xl  bg-white" onclick='changecolor({{ $product->id }})'>
+
                         <img class="h-24 aspect-square object-contain" src={{ $product->image ?? asset('Images/noImage.png') }} />
                         <h5 class="p-2 text-sm">{{ $product->name }}</h5>
                     </div>
