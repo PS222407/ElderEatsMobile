@@ -71,26 +71,26 @@
                     <li class="mb-1">
                         <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded cursor-pointer" onclick="location.href='{{ route('connect') }}'">Apparaat configureren</a>
                     </li>
-                    <li class="mb-1">
-                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Wijzigen van Account</a>
-                    </li>
+{{--                    <li class="mb-1">--}}
+{{--                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Wijzigen van Account</a>--}}
+{{--                    </li>--}}
                     <li class="mb-1">
                         <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Taal</a>
                     </li>
 
 
-                    <li class="mb-1 pt-3">
-                        <a class="text-white block p-4 text-lg font-bold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Over ons</a>
-                    </li>
-                    <li class="">
-                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Help</a>
-                    </li>
-                    <li class="">
-                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Informatie</a>
-                    </li>
-                    <li class="">
-                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Rapporteer een probleem</a>
-                    </li>
+{{--                    <li class="mb-1 pt-3">--}}
+{{--                        <a class="text-white block p-4 text-lg font-bold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Over ons</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="">--}}
+{{--                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Help</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="">--}}
+{{--                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Informatie</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="">--}}
+{{--                        <a class="text-white block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Rapporteer een probleem</a>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
             <div class="mt-auto">
