@@ -33,26 +33,25 @@
             </div>
             <div>
                 <ul>
-                    <div class="flex pl-4">
-                        <a class="text-white block text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded">Apparaat:</a>
+                    @isset($accounts)
+                        <div class="flex pl-4">
+                            <a class="text-white block text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded">Apparaat:</a>
 
-                        @php
-                            $i = 0;
-                        @endphp
-                        <form action="/" method="get" name="FormM">
-                            <select class="ml-2 pl-4 pr-12 py-0 rounded" name="ConnectionNumber" onchange="this.form.submit()">
-                                @isset($accounts)
-                                    @foreach ($accounts as $account)
-                                        <option value="{{ $i }}" @if ($account->id == $selectedAccount->id) selected @endif>
-                                            {{ $account->name ?? $i + 1 }}
-                                        </option>
-                                        {{ $i++ }}
-                                    @endforeach
-                                @endisset
-                            </select>
-                        </form>
-                    </div>
-
+                            @php
+                                $i = 0;
+                            @endphp
+                            <form action="/" method="get" name="FormM">
+                                <select class="ml-2 pl-4 pr-12 py-0 rounded" name="ConnectionNumber" onchange="this.form.submit()">
+                                        @foreach ($accounts as $account)
+                                            <option value="{{ $i }}" @if ($account->id == $selectedAccount->id) selected @endif>
+                                                {{ $account->name ?? $i + 1 }}
+                                            </option>
+                                            {{ $i++ }}
+                                        @endforeach
+                                </select>
+                            </form>
+                        </div>
+                    @endisset
 
                     <li class="mb-1 pt-3">
                         <a class="text-white block p-4 text-lg font-bold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Functies</a>
