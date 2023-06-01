@@ -41,12 +41,14 @@
                         @endphp
                         <form action="/" method="get" name="FormM">
                             <select class="ml-2 pl-4 pr-12 py-0 rounded" name="ConnectionNumber" onchange="this.form.submit()">
-                                @foreach ($accounts as $account)
-                                    <option value="{{ $i }}" @if ($account->id == $selectedAccount->id) selected @endif>
-                                        {{ $account->name ?? $i + 1 }}
-                                    </option>
-                                    {{ $i++ }}
-                                @endforeach
+                                @isset($accounts)
+                                    @foreach ($accounts as $account)
+                                        <option value="{{ $i }}" @if ($account->id == $selectedAccount->id) selected @endif>
+                                            {{ $account->name ?? $i + 1 }}
+                                        </option>
+                                        {{ $i++ }}
+                                    @endforeach
+                                @endisset
                             </select>
                         </form>
                     </div>

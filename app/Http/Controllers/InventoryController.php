@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use function PHPUnit\Framework\isNan;
-use function PHPUnit\Framework\isNull;
-
 class InventoryController extends Controller
 {
     public function index()
@@ -25,12 +22,17 @@ class InventoryController extends Controller
                 $Account = $User->Connections[$accountIndex];
                 $products = $Account->GetProducts()->wherePivotNull('ran_out_at')->get();
 
-                return view('storedProducts', ['products' => $products, 'accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $accountIndex]);
+                return view('storedProducts', [
+                    'products' => $products,
+                    'accounts' => $User->Connections,
+                    'selectedAccount' => $Account,
+                    'accountIndex' => $accountIndex,
+                ]);
             }
-        //TODO: error connection nummer to high
-        } else {
-            return view('noAccountConnection');
+            // TODO: error connection nummer to high
         }
+
+        return view('noAccountConnection');
     }
 
     public function edit(int $productID)
@@ -44,11 +46,10 @@ class InventoryController extends Controller
         if (count($User->Connections) > 0) {
             $Account = $User->Connections[$accountIndex];
 
-            if(!is_null($Account->GetProductsById($productID))){
-            return view('editProduct', ['product' => $Account->GetProductsById($productID), 'accountIndex' => $accountIndex]);
-            }else{
-                return view('Productdoesnotexist');
+            if (!is_null($Account->GetProductsById($productID))) {
+                return view('editProduct', ['product' => $Account->GetProductsById($productID), 'accountIndex' => $accountIndex]);
             }
+            return view('Productdoesnotexist');
         }
     }
 
