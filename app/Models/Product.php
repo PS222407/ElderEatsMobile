@@ -13,12 +13,18 @@ class Product extends Model
 
     protected $fillable = [
         'name',
-        'barcode ',
+        'barcode',
+        'id',
+        'image'
     ];
 
     public function accounts(): BelongsToMany
     {
         return $this->belongsToMany(Account::class, 'account_products');
+    }
+    public function GetProductsById(int $productID)
+    {
+        return Product::find($productID);
     }
     protected function fullName(): Attribute
     {

@@ -37,10 +37,18 @@ Route::view('/connection-failed', 'LoginFailed')->name('connection-failed');
 
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::view('/test', 'AddImage')->name('test');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/Product-image/{productID}', [InventoryController::class, 'storeImagePage'])->name('Product-image');
+
+Route::post('/upload-image/{productID}', [InventoryController::class, 'storeImage'])->name('upload-image');
+
+
 
 require __DIR__ . '/auth.php';

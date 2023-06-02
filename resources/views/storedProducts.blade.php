@@ -13,6 +13,12 @@
                         </p>
                     </div>
                     <p class=" absolute right-7">--{{ dateShortStringToHumanNL($product->pivot->expiration_date) }}</p>
+                    @if(is_null($product->image))
+                   
+                    <img class="absolute right-2.5 w-4 top-0.5" src="{{ asset('Images/mark.png') }}" alt="bewerken" />
+
+                    @endif
+                    
                     <a href="{{ route('inventory.edit', $product->pivot->id) }}" class="absolute right-0">
                         <img class=" w-6" src="{{ asset('svg/pencil.svg') }}" alt="bewerken" />
                     </a>
