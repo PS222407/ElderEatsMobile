@@ -113,14 +113,12 @@ class InventoryController extends Controller
 
         $imageName = time();
 
-        // Public Folder
-        //$request->image->move(public_path('images'), $imageName);
-
-        // //Store in Storage Folder
-        //Storage::put($imageName, $request->image);
-
-        //Storage::put('public/'. $imageName, $request->image);
-        $path = 'storage/';
+        if (app()->environment('local')) {
+            $path = 'storage/';
+        } else {
+            $path = 'https://eldereatsmobile.jensramakers.nl/storage/';
+        }
+        
         $path = $path . Storage::disk('public')->put($imageName, $request->image);
 
         //$path = 'storage/'. $imageName.'/'. $request->image;
