@@ -106,7 +106,7 @@ class InventoryController extends Controller
 
 
         $validated = $request->validate([
-            'image' => 'required|image|mimes:png,jpg,jpeg,webp'
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:8192|min:0'
         ]);
 
         //dd($validated);
@@ -122,14 +122,8 @@ class InventoryController extends Controller
         $path = $path . Storage::disk('public')->put($imageName, $request->image);
 
         //$path = 'storage/'. $imageName.'/'. $request->image;
-        if (Session::exists('AccountIndex')) {
-            $accountIndex = Session::get('AccountIndex');
-        } else {
-            $accountIndex = 0;
-        }
         $User = Auth::user();
         if (count($User->Connections) > 0) {
-            $Account = $User->Connections[$accountIndex];
 
             if (!is_null(Product::find($productID))) {
                 $product = Product::find($productID);
@@ -139,12 +133,11 @@ class InventoryController extends Controller
                 return redirect()->route('inventory.index');
             } else {
 
-                return 'e';
-                //return view('Productdoesnotexist');
+                return view('Productdoesnotexist');
             }
         }
 
-        return 'e3';
+        //return 'e3';
         return back()->with('success', 'Image uploaded Successfully!')
             ->with('image', $imageName);
     }
