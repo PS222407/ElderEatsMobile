@@ -31,6 +31,7 @@ Route::post('shopping-list', [ShoppingListController::class, 'update'])->name('s
 Route::get('inventory', [InventoryController::class, 'index'])->name('inventory.index');
 Route::get('inventory/{productID}/', [InventoryController::class, 'edit'])->name('inventory.edit');
 Route::post('inventory/{productID}', [InventoryController::class, 'update'])->name('inventory.update');
+Route::delete('inventory/{pivotId}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
 
 Route::view('/connect', 'Login')->name('connect');
 Route::view('/connection-failed', 'LoginFailed')->name('connection-failed');

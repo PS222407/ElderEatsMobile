@@ -141,4 +141,9 @@ class InventoryController extends Controller
         return back()->with('success', 'Image uploaded Successfully!')
             ->with('image', $imageName);
     }
+
+    public function destroy(int $pivotId)
+    {
+        dd($pivotId);
+    }
 }
