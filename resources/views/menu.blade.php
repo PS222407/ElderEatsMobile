@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div>
-            <img src="/Images/ElderEating.jpg" class="w-full h-96 object-cover">
+            <img src="{{ asset('Images/ElderEating.jpg') }}" alt="elder eating" class="w-full h-96 object-cover">
         </div>
 
         <div class="px-10 pt-5">
