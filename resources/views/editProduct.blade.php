@@ -26,8 +26,8 @@
             <a href="{{ route('Product-image' , $product->id) }}" class="w-full mt-2 mb-2 bg-banner text-white p-2 rounded-full text-center">Voegtoe</a>
         </div>
         </div>
-     
-    
+
+
         @endif
     </div>
 

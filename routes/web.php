@@ -50,6 +50,4 @@ Route::get('/Product-image/{productID}', [InventoryController::class, 'storeImag
 
 Route::post('/upload-image/{productID}', [InventoryController::class, 'storeImage'])->name('upload-image');
 
-
-
 require __DIR__ . '/auth.php';
