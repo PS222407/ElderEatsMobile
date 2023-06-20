@@ -10,12 +10,8 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->id();
-            $table->string('token');
-            $table->string('temporary_token')->nullable();
-            $table->timestamp('temporary_token_expires_at')->nullable();
-            $table->timestamps();
+        Schema::table('accounts', function (Blueprint $table) {
+            $table->string('name')->nullable()->after('id');
         });
     }
 
@@ -24,6 +20,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::table('accounts', function (Blueprint $table) {
+            $table->dropColumn('name');
+        });
     }
 };

@@ -76,7 +76,6 @@ class Login extends Controller
                 $ConnectionNumber = 0;
             }
             $Account = $User->Connections[$ConnectionNumber];
-
             return view('menu', ['accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
         }
         return view('noAccountConnection');
