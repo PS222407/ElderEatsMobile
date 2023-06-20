@@ -13,8 +13,8 @@
                 <div class="relative">
                     <div class="flex flex-col h-full rounded-xl border-gray border m-1 w-90 overflow-hidden shadow-xl  bg-white" onclick='changecolor({{ $product->id }})'>
 
-                        <img class="h-24 aspect-square object-contain" src={{ $product->image ?? asset('Images/noImage.png') }} />
-                        <h5 class="p-2 text-sm">{{ $product->name }}</h5>
+                        <img class="h-24 aspect-square object-contain" src={{ $product->product->image ?? asset('Images/noImage.png') }} />
+                        <h5 class="p-2 text-sm">{{ $product->product->name }}</h5>
                     </div>
                     <div class="absolute -right-2 top-10" checkState=0
                          id='check-{{ $product->id }}'>
@@ -70,7 +70,7 @@
             //alert("test")
             const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
-
+            console.log( JSON.stringify(ChangedData));
             await fetch(`{{ route('shopping-list.update') }}`, {
                     method: 'POST',
                     headers: {
@@ -79,6 +79,8 @@
                         "X-CSRF-Token": csrfToken
                     },
                     body: JSON.stringify(ChangedData),
+                }).then((response) => {
+                    console.log( response);
                 })
 
                 location.reload();

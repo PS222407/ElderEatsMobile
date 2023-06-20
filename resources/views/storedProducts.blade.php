@@ -9,22 +9,22 @@
                 <div class="py-3 relative flex">
                     <div class="flex ">
                         <p class=" flex-wrap w-56">
-                            {{ $product->full_name }}
+                            {{ $product->product->full_name }}
                         </p>
                     </div>
 
-                    <p>--{{ dateShortStringToHumanNL($product->pivot->expiration_date) }}</p>
+                    <p>--{{ dateShortStringToHumanNL($product->expirationDate) }}</p>
 
                     <div aria-label="action-buttons" class="flex gap-x-10 w-fit">
                         <div>
-                            @if(is_null($product->image))
+                            @if(is_null($product->product->image))
                                 <img class="w-4 top-0.5" src="{{ asset('Images/mark.png') }}" alt="bewerken" />
                             @endif
-                            <a href="{{ route('inventory.edit', $product->pivot->id) }}">
+                            <a href="{{ route('inventory.edit', $product->id) }}">
                                 <img class="w-6" src="{{ asset('svg/pencil.svg') }}" alt="bewerken" />
                             </a>
                         </div>
-                        <form action="{{ route('inventory.destroy', $product->pivot->id) }}" method="post" onsubmit="return confirm('Weet je zeker dat je dit product wil verwijderen?')">
+                        <form action="{{ route('inventory.destroy', $product->id) }}" method="post" onsubmit="return confirm('Weet je zeker dat je dit product wil verwijderen?')">
                             @csrf
                             @method('DELETE')
                             <button style="padding: .5em">
