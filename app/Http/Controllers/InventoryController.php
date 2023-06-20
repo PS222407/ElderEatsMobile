@@ -27,6 +27,11 @@ class InventoryController extends Controller
         $User = Auth::user();
         $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
 
+        if($UserConnections == null){
+            return view('noAccountConnection');
+        }
+
+
         if ($accountIndex > count($UserConnections)) {
             $Account = $UserConnections[0];
         } else {
@@ -50,8 +55,6 @@ class InventoryController extends Controller
             'selectedAccount' => $Account,
             'accountIndex' => $accountIndex,
         ]);
-
-        return view('noAccountConnection');
     }
 
     public function edit(int $productID)
@@ -64,6 +67,10 @@ class InventoryController extends Controller
         $User = Auth::user();
         $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
 
+        if($UserConnections == null){
+            return view('noAccountConnection');
+        }
+        
         if (count($UserConnections) > 0) {
 
             if ($accountIndex > count($UserConnections)) {
