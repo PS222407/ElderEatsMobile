@@ -15,7 +15,7 @@
 
                     <p>--{{ dateShortStringToHumanNL($product->pivot->expiration_date) }}</p>
 
-                    <div aria-label="action-buttons" class="flex gap-x-10 w-fit">
+                    <div aria-label="action-buttons" class="flex gap-x-2 w-fit">
                         <div>
                             @if(is_null($product->image))
                                 <img class="w-4 top-0.5" src="{{ asset('Images/mark.png') }}" alt="bewerken" />
