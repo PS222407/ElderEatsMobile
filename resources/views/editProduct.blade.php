@@ -21,7 +21,7 @@
         @if(!isset($product->product->image))
 
         <div class=" m-4 border-2">
-        <h2 class="font-bold text-center mt-10">lijkt er op dat er nog geen foto voor dit product bestaat. u kunt deze toevoegen als u wilt</h2>
+        <h2 class="font-bold text-center mt-10">Het lijkt erop dat er nog geen foto voor dit product beschikbaar is. U kunt deze toevoegen als u dat wenst.</h2>
         <div class="flex m-3 flex-col gap-y-2 mt-3">
             <a href="{{ route('Product-image' , $product->product->id) }}" class="w-full mt-2 mb-2 bg-banner text-white p-2 rounded-full text-center">Voegtoe</a>
         </div>

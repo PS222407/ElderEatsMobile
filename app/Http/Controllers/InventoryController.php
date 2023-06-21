@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\account_products;
-use App\Models\AccountProducts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Product;
-
-use function PHPUnit\Framework\isNull;
 
 class InventoryController extends Controller
 {
@@ -25,12 +20,11 @@ class InventoryController extends Controller
         }
 
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/User/' . $User->id . '/Accounts/Active')->json();
 
-        if($UserConnections == null){
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
-
 
         if ($accountIndex > count($UserConnections)) {
             $Account = $UserConnections[0];
@@ -39,7 +33,7 @@ class InventoryController extends Controller
         }
         $Account = json_decode(json_encode($Account));
 
-        $products = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/Accounts/" . $Account->id . "/Products")->json();
+        $products = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/Accounts/' . $Account->id . '/Products')->json();
 
         $products = json_decode(json_encode($products));
 
@@ -65,21 +59,20 @@ class InventoryController extends Controller
             $accountIndex = 0;
         }
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/User/' . $User->id . '/Accounts/Active')->json();
 
-        if($UserConnections == null){
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
-        
-        if (count($UserConnections) > 0) {
 
+        if (count($UserConnections) > 0) {
             if ($accountIndex > count($UserConnections)) {
                 $Account = $UserConnections[0];
             } else {
                 $Account = $UserConnections[$accountIndex];
             }
             $Account = json_decode(json_encode($Account));
-            $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/Products/Product/Connection/" . $productID . "/withConnection")->json();
+            $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/Products/Product/Connection/' . $productID . '/withConnection')->json();
 
             $Product = json_decode(json_encode($Product));
 
@@ -101,11 +94,11 @@ class InventoryController extends Controller
             'datetime' => ['nullable', 'date', 'max:10'],
         ]);
         $User = Auth::user();
-        $ar = array('expirationDate' => $request->datetime);
+        $ar = ['expirationDate' => $request->datetime];
         $json = json_encode($ar);
 
         $response = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->put(
-            config('app.api_base_url') . "/Products/Account/" . $productID . "/ExpirationDate",
+            config('app.api_base_url') . '/Products/Account/' . $productID . '/ExpirationDate',
             $json
         );
 
@@ -120,9 +113,8 @@ class InventoryController extends Controller
             $accountIndex = 0;
         }
         $User = Auth::user();
-        $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/Products/" . $productID)->json();
+        $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/Products/' . $productID)->json();
         $Product = json_decode(json_encode($Product));
-
 
         if (!property_exists($Product, 'status')) {
             return view('AddImage', ['productID' => $productID]);
@@ -145,15 +137,13 @@ class InventoryController extends Controller
         }
         $path = $path . Storage::disk('public')->put($imageName, $request->image);
         $User = Auth::user();
-        $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/Products/" . $productID)->json();
+        $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/Products/' . $productID)->json();
         $Product = json_decode(json_encode($Product));
         if (!property_exists($Product, 'status')) {
-
-
-            $ar = array("id" => $productID, 'image' => $path);
+            $ar = ['id' => $productID, 'image' => $path];
             $json = json_encode($ar);
             $response = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->put(
-                config('app.api_base_url') . "/Products/Product/Image",
+                config('app.api_base_url') . '/Products/Product/Image',
                 $json
             );
             return redirect()->route('inventory.index');
@@ -165,7 +155,7 @@ class InventoryController extends Controller
     {
         $User = Auth::user();
         $response = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->put(
-            config('app.api_base_url') . "/Accounts/Products/" . $pivotId . "/Ranout",
+            config('app.api_base_url') . '/Accounts/Products/' . $pivotId . '/Ranout',
         );
         return redirect()->route('inventory.index');
     }

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-
 class ShoppingListController extends Controller
 {
     public function index()
@@ -19,13 +18,13 @@ class ShoppingListController extends Controller
         } else {
             $accountIndex = 0;
         }
-        
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). "/User/" . $User->id . "/Accounts/Active")->json();
-       
-        if($UserConnections == null){
+
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). '/User/' . $User->id . '/Accounts/Active')->json();
+
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
-       
+
         if ($accountIndex > count($UserConnections)) {
             $Account = $UserConnections[0];
         } else {
@@ -33,7 +32,7 @@ class ShoppingListController extends Controller
         }
         $test = json_decode(json_encode($Account));
 
-        $fixedProducts = json_decode(json_encode(Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). "/Accounts/".$test->id."/FixedProducts")->json())); 
+        $fixedProducts = json_decode(json_encode(Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). '/Accounts/'.$test->id.'/FixedProducts')->json()));
 
         return view('shoppingList', [
             'products' =>  $fixedProducts,
@@ -50,9 +49,9 @@ class ShoppingListController extends Controller
         }
 
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). "/User/" . $User->id . "/Accounts/Active")->json();
-        
-        if($UserConnections == null){
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). '/User/' . $User->id . '/Accounts/Active')->json();
+
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
 
@@ -69,11 +68,11 @@ class ShoppingListController extends Controller
             $dataobject[$k] = $v;
         }
 
-        $response = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->put(config('app.api_base_url'). "/Accounts/".$Account->id."/Fixedproducts/Update", 
-        json_encode($dataobject)
+        $response = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->put(
+            config('app.api_base_url'). '/Accounts/'.$Account->id.'/Fixedproducts/Update',
+            json_encode($dataobject)
         );
         dd($response->json());
         return $dataobject;
-        
     }
 }
