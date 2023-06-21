@@ -63,7 +63,11 @@ class Login extends Controller
             Session::put(['AccountIndex' => $ConnectionNumber]);
         } else {
             if (Session::exists('AccountIndex')) {
+                if(Session::get('AccountIndex') > $ConnectionNumber){
+                    $ConnectionNumber = 0;
+                }else{
                 $ConnectionNumber = Session::get('AccountIndex');
+                }
             } else {
                 $ConnectionNumber = 0;
             }
@@ -75,6 +79,7 @@ class Login extends Controller
                 Session::put(['AccountIndex' => 0]);
                 $ConnectionNumber = 0;
             }
+            //dd($User->Connections);
             $Account = $User->Connections[$ConnectionNumber];
             return view('menu', ['accounts' => $User->Connections, 'selectedAccount' => $Account, 'accountIndex' => $ConnectionNumber]);
         }
