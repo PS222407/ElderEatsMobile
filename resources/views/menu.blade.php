@@ -8,7 +8,21 @@
 
         <div class="px-10 pt-5">
             <h1 class="text-4xl font-medium">Welkom bij ElderEats</h1>
-            <p class="pt-4 text-lg">Met deze mobiele applicatie kun je de producten inzien van de ouderen. Ook kun je met deze app producten aanmaken.</p>
+            <p class="pt-4 text-lg">
+                Welkom bij "ElderEats" - de app die smaakvolle verbindingen creëert tussen oudere mensen en hun boodschappen.
+
+                Er is iets magisch aan voedsel - het heeft de kracht om herinneringen op te roepen, emoties te voeden en ons terug te brengen naar dierbare momenten uit het verleden. Bij ElderEats begrijpen we dat de eenvoudige handeling van boodschappen doen veel meer is dan alleen het verzamelen van ingrediënten. Het gaat om het delen van verhalen, het koesteren van tradities en het versterken van banden met degenen die ons het meest dierbaar zijn.
+
+                Met ElderEats willen we oudere mensen in staat stellen om met gemak boodschappen te doen en tegelijkertijd een brug te slaan tussen generaties. We geloven dat elke maaltijd een kans is om liefde en zorg te delen, zelfs als fysieke afstand ons scheidt.
+
+                Deze app is meer dan alleen een boodschappenlijst - het is een culinaire metgezel die inspiratie biedt, recepten deelt en het delen van maaltijden met familie en vrienden bevordert. Met ElderEats kunnen oudere mensen hun favoriete gerechten en boodschappenlijstjes eenvoudig beheren, ze delen met hun dierbaren en zelfs nieuwe culinaire ontdekkingen doen.
+
+                Of het nu gaat om het traditionele familierecept dat al generaties lang wordt doorgegeven, of een eenvoudig gerecht dat troost biedt op een eenzame dag - ElderEats staat klaar om je te ondersteunen bij het creëren van heerlijke herinneringen en het ervaren van de vreugde van het samenzijn, zelfs op afstand.
+
+                We nodigen je uit om deel te nemen aan deze smakelijke reis. Een reis vol gastronomische avonturen, gelach aan de keukentafel en het delen van liefdevolle momenten. Samen kunnen we van boodschappen doen een smaakvolle en betekenisvolle ervaring maken.
+
+                Welkom bij ElderEats, waar voedsel de taal van genegenheid spreekt.
+            </p>
         </div>
     </div>
 
