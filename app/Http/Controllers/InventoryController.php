@@ -58,6 +58,9 @@ class InventoryController extends Controller
 
     public function edit($productID)
     {
+
+        //dd($productID);
+
         if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
         } else {
@@ -80,12 +83,15 @@ class InventoryController extends Controller
 
             $Product = json_decode(json_encode($Product));
 
-            if ($Product->expirationDate != null) {
-                $Product->expirationDate = Carbon::parse($Product->expirationDate)->format('Y-m-d');
-            }
+            if (!property_exists($Product, 'errors') && !property_exists($Product, 'status')) {
 
-            if (!is_null($Product)) {
-                return view('editProduct', ['product' => $Product, 'accountIndex' => $accountIndex]);
+                if ($Product->expirationDate != null) {
+                    $Product->expirationDate = Carbon::parse($Product->expirationDate)->format('Y-m-d');
+                }
+
+                if (!is_null($Product)) {
+                    return view('editProduct', ['product' => $Product, 'accountIndex' => $accountIndex]);
+                }
             }
 
             return view('Productdoesnotexist');
@@ -109,7 +115,7 @@ class InventoryController extends Controller
         return redirect()->route('inventory.index');
     }
 
-    public function storeImagePage( $productID)
+    public function storeImagePage($productID)
     {
         if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
@@ -120,9 +126,11 @@ class InventoryController extends Controller
         $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/Products/" . $productID)->json();
         $Product = json_decode(json_encode($Product));
 
+        if ($Product != null) {
+            if (!property_exists($Product, 'errors') && !property_exists($Product, 'status')) {
 
-        if (!property_exists($Product, 'status')) {
-            return view('AddImage', ['productID' => $productID]);
+                return view('AddImage', ['productID' => $productID]);
+            }
         }
         return view('Productdoesnotexist');
     }
