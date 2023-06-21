@@ -23,14 +23,12 @@
             if (response.pivot.status == 0) {
                 location.href = '/';
             }
-            if (response.pivot.status == 1) {
-
+            else if (response.pivot.status == 2) {
+                location.href = '{{ route('connection-failed') }}';
+            }else{
                 setTimeout(function() {
                     Data();
-                }, 1000);
-            }
-            if (response.pivot.status == 2) {
-                location.href = '{{ route('connection-failed') }}';
+                }, 1000); 
             }
             //if(response.pivot.updated_at )
         }

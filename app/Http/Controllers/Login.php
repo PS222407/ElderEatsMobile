@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
+use function PHPUnit\Framework\isNull;
+
 class Login extends Controller
 {
     public function RequestConnection(Request $request)
@@ -58,12 +60,19 @@ class Login extends Controller
 
     public function LoadMenu(Request $request)
     {
-        $ConnectionNumber = $request->input('ConnectionNumber', -1);
+        $Connection = $request->input('ConnectionNumber', -1);
+        $ConnectionNumber = (int) $Connection;
+
+        if(is_null($ConnectionNumber)){
+            $ConnectionNumber=-1;
+        }
         if ($ConnectionNumber >= 0) {
             Session::put(['AccountIndex' => $ConnectionNumber]);
         } else {
             if (Session::exists('AccountIndex')) {
+                dd($ConnectionNumber);
                 $ConnectionNumber = Session::get('AccountIndex');
+
             } else {
                 $ConnectionNumber = 0;
             }

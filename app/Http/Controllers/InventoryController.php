@@ -20,12 +20,10 @@ class InventoryController extends Controller
         }
 
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/User/' . $User->id . '/Accounts/Active')->json();
-
-        if($UserConnections == null) {
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
+        if($UserConnections == null){
             return view('noAccountConnection');
         }
-
         if ($accountIndex > count($UserConnections)) {
             $Account = $UserConnections[0];
         } else {
@@ -51,20 +49,21 @@ class InventoryController extends Controller
         ]);
     }
 
-    public function edit(int $productID)
+    public function edit($productID)
     {
+
+        //dd($productID);
+
         if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
         } else {
             $accountIndex = 0;
         }
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/User/' . $User->id . '/Accounts/Active')->json();
-
-        if($UserConnections == null) {
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
+        if($UserConnections == null){
             return view('noAccountConnection');
         }
-
         if (count($UserConnections) > 0) {
             if ($accountIndex > count($UserConnections)) {
                 $Account = $UserConnections[0];
@@ -76,19 +75,22 @@ class InventoryController extends Controller
 
             $Product = json_decode(json_encode($Product));
 
-            if ($Product->expirationDate != null) {
-                $Product->expirationDate = Carbon::parse($Product->expirationDate)->format('Y-m-d');
-            }
+            if (!property_exists($Product, 'errors') && !property_exists($Product, 'status')) {
 
-            if (!is_null($Product)) {
-                return view('editProduct', ['product' => $Product, 'accountIndex' => $accountIndex]);
+                if ($Product->expirationDate != null) {
+                    $Product->expirationDate = Carbon::parse($Product->expirationDate)->format('Y-m-d');
+                }
+
+                if (!is_null($Product)) {
+                    return view('editProduct', ['product' => $Product, 'accountIndex' => $accountIndex]);
+                }
             }
 
             return view('Productdoesnotexist');
         }
     }
 
-    public function update(Request $request, int $productID)
+    public function update(Request $request, $productID)
     {
         $request->validate([
             'datetime' => ['nullable', 'date', 'max:10'],
@@ -105,7 +107,7 @@ class InventoryController extends Controller
         return redirect()->route('inventory.index');
     }
 
-    public function storeImagePage(int $productID)
+    public function storeImagePage($productID)
     {
         if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
@@ -116,13 +118,16 @@ class InventoryController extends Controller
         $Product = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/Products/' . $productID)->json();
         $Product = json_decode(json_encode($Product));
 
-        if (!property_exists($Product, 'status')) {
-            return view('AddImage', ['productID' => $productID]);
+        if ($Product != null) {
+            if (!property_exists($Product, 'errors') && !property_exists($Product, 'status')) {
+
+                return view('AddImage', ['productID' => $productID]);
+            }
         }
         return view('Productdoesnotexist');
     }
 
-    public function storeImage(Request $request, int $productID)
+    public function storeImage(Request $request, $productID)
     {
         $validated = $request->validate([
             'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:8192|min:0'
