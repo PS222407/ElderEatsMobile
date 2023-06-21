@@ -70,7 +70,7 @@ class Login extends Controller
             Session::put(['AccountIndex' => $ConnectionNumber]);
         } else {
             if (Session::exists('AccountIndex')) {
-                dd($ConnectionNumber);
+
                 $ConnectionNumber = Session::get('AccountIndex');
 
             } else {
