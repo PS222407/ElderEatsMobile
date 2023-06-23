@@ -50,4 +50,8 @@ Route::get('/Product-image/{productID}', [InventoryController::class, 'storeImag
 
 Route::post('/upload-image/{productID}', [InventoryController::class, 'storeImage'])->name('upload-image');
 
+Route::get('testweb', function () {
+    dd(config('app.api_base_url'), config('app.tablet_domain'));
+});
+
 require __DIR__ . '/auth.php';
