@@ -33,7 +33,7 @@ class Login extends Controller
             'account_token' => $account->token,
         ]);
 
-        dd($response->json(), $response);
+        dd($response->json(), $response, $account, config('app.tablet_domain'). '/api/v1/account-connection');
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }
