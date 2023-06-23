@@ -28,11 +28,10 @@ class Login extends Controller
             'status' => ConnectionStatus::IN_PROCESS,
         ]);
 
-        if (App::environment('production')) {
-            Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
-                'account_token' => $account->token,
-            ]);
-        }
+        // dd('help', $account->token, config('app.tablet_domain') . '/api/v1/account-connection');
+        Http::post('https://www.eldereats.nl/api/v1/account-connection', [
+            'account_token' => $account->token,
+        ]);
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }
