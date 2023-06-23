@@ -29,9 +29,11 @@ class Login extends Controller
         ]);
 
         // dd('help', $account->token, config('app.tablet_domain') . '/api/v1/account-connection');
-        Http::post('https://www.eldereats.nl/api/v1/account-connection', [
+        $response = Http::post(config('app.tablet_domain'). '/api/v1/account-connection', [
             'account_token' => $account->token,
         ]);
+
+        dd($response->json(), $response);
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }
