@@ -33,7 +33,7 @@ class InventoryController extends Controller
 
         $products = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/Accounts/' . $Account->id . '/Products')->json();
 
-        $products = json_decode(json_encode($products)) ?? [];
+        $products = json_decode(json_encode($products));
 
         foreach ($products as $product) {
             if ($product->expirationDate != null) {
