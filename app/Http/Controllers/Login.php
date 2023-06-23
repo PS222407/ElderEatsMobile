@@ -28,11 +28,6 @@ class Login extends Controller
             'status' => ConnectionStatus::IN_PROCESS,
         ]);
 
-        if (App::environment('production')) {
-            Http::post(config('app.tablet_domain') . '/api/v1/account-connection', [
-                'account_token' => $account->token,
-            ]);
-        }
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }
