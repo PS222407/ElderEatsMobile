@@ -19,7 +19,7 @@
         }
 
         function Process(response) {
-            console.log(JSON.stringify(response));
+            //console.log(JSON.stringify(response));
             if (response.pivot.status == 0) {
                 location.href = '/';
             }
