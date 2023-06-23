@@ -20,8 +20,8 @@ class InventoryController extends Controller
         }
 
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
-        if($UserConnections == null){
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/User/' . $User->id . '/Accounts/Active')->json();
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
         if ($accountIndex > count($UserConnections)) {
@@ -51,17 +51,14 @@ class InventoryController extends Controller
 
     public function edit($productID)
     {
-
-        //dd($productID);
-
         if (Session::exists('AccountIndex')) {
             $accountIndex = Session::get('AccountIndex');
         } else {
             $accountIndex = 0;
         }
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . "/User/" . $User->id . "/Accounts/Active")->json();
-        if($UserConnections == null){
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url') . '/User/' . $User->id . '/Accounts/Active')->json();
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
         if (count($UserConnections) > 0) {
@@ -76,7 +73,6 @@ class InventoryController extends Controller
             $Product = json_decode(json_encode($Product));
 
             if (!property_exists($Product, 'errors') && !property_exists($Product, 'status')) {
-
                 if ($Product->expirationDate != null) {
                     $Product->expirationDate = Carbon::parse($Product->expirationDate)->format('Y-m-d');
                 }
@@ -120,7 +116,6 @@ class InventoryController extends Controller
 
         if ($Product != null) {
             if (!property_exists($Product, 'errors') && !property_exists($Product, 'status')) {
-
                 return view('AddImage', ['productID' => $productID]);
             }
         }

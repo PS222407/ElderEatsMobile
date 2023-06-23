@@ -28,7 +28,7 @@
             }else{
                 setTimeout(function() {
                     Data();
-                }, 1000); 
+                }, 1000);
             }
             //if(response.pivot.updated_at )
         }

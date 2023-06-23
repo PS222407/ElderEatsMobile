@@ -18,12 +18,12 @@ class ShoppingListController extends Controller
         } else {
             $accountIndex = 0;
         }
-        
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). "/User/" . $User->id . "/Accounts/Active")->json();
-        if($UserConnections == null){
+
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). '/User/' . $User->id . '/Accounts/Active')->json();
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
-        
+
         if ($accountIndex > count($UserConnections)) {
             $Account = $UserConnections[0];
         } else {
@@ -48,8 +48,8 @@ class ShoppingListController extends Controller
         }
 
         $User = Auth::user();
-        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). "/User/" . $User->id . "/Accounts/Active")->json();
-        if($UserConnections == null){
+        $UserConnections = Http::withoutVerifying()->withHeaders(['x-api-key' => $User->token])->get(config('app.api_base_url'). '/User/' . $User->id . '/Accounts/Active')->json();
+        if($UserConnections == null) {
             return view('noAccountConnection');
         }
         if ($accountIndex > count($UserConnections)) {
