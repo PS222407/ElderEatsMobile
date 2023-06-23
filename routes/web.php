@@ -34,9 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('inventory/{productID}/', [InventoryController::class, 'edit'])->name('inventory.edit');
     Route::post('inventory/{productID}', [InventoryController::class, 'update'])->name('inventory.update');
     Route::delete('inventory/{pivotId}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+
+    Route::view('/connect', 'Login')->name('connect');
 });
 
-Route::view('/connect', 'Login')->name('connect');
 Route::view('/connection-failed', 'LoginFailed')->name('connection-failed');
 
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
