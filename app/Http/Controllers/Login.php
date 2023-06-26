@@ -29,7 +29,7 @@ class Login extends Controller
         ]);
 
         // dd('help', $account->token, config('app.tablet_domain') . '/api/v1/account-connection');
-        $response = Http::post(config('app.tablet_domain'). '/api/v1/account-connection', [
+        $response = Http::withoutVerifying()->post(config('app.tablet_domain'). '/api/v1/account-connection', [
             'account_token' => $account->token,
         ]);
 
