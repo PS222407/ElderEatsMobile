@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ShoppingListController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,14 +55,11 @@ Route::get('/Product-image/{productID}', [InventoryController::class, 'storeImag
 Route::post('/upload-image/{productID}', [InventoryController::class, 'storeImage'])->name('upload-image');
 
 Route::get('/testapi/{token}', function ($token) {
-    $response = Http::get('https://api.eldereats.nl/api/v2/Accounts/Token/'. $token);
-
-    $responsePost = Http::post('https://api.eldereats.nl/api/v2/Accounts', [
-        'name' => Str::random(12),
-        'token' => Str::uuid(),
+    $response = Http::withoutVerifying()->post('https://www.eldereats.nl/api/v1/account-connection', [
+        'account_token' => '68a4aa6f-e6e5-4500-aae7-817b08b8e926',
     ]);
 
-    dd($response, $response->json(), $responsePost, $responsePost->json());
+    dd($response->json());
 });
 Route::get('testweb', function () {
     dd(config('app.api_base_url'), config('app.tablet_domain'), config('app.env'));
