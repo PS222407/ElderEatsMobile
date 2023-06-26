@@ -27,14 +27,13 @@ class Login extends Controller
         ], [
             'status' => ConnectionStatus::IN_PROCESS,
         ]);
-        
-        if (App::environment('production')) {
 
-            $ar = ['account_token' => $account->token];
-            $json = json_encode($ar);    
+        // dd('help', $account->token, config('app.tablet_domain') . '/api/v1/account-connection');
+        $ar = ['account_token' => $account->token];
+        $json = json_encode($ar);
+        $response = Http::withoutVerifying()->post(config('app.tablet_domain'). '/api/v1/account-connection', $json);
 
-            $response = Http::withoutVerifying()->post(config('app.tablet_domain') . '/api/v1/account-connection', $json);
-        }
+        dd($response->json(), $response, $account, config('app.tablet_domain'). '/api/v1/account-connection');
 
         return view('waitforconnection', ['accountID' => $account->id]);
     }

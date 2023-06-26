@@ -53,8 +53,18 @@ Route::get('/Product-image/{productID}', [InventoryController::class, 'storeImag
 
 Route::post('/upload-image/{productID}', [InventoryController::class, 'storeImage'])->name('upload-image');
 
+Route::get('/testapi/{token}', function ($token) {
+    $response = Http::get('https://api.eldereats.nl/api/v2/Accounts/Token/'. $token);
+
+    $responsePost = Http::post('https://api.eldereats.nl/api/v2/Accounts', [
+        'name' => Str::random(12),
+        'token' => Str::uuid(),
+    ]);
+
+    dd($response, $response->json(), $responsePost, $responsePost->json());
+});
 Route::get('testweb', function () {
-    dd(config('app.api_base_url'), config('app.tablet_domain'));
+    dd(config('app.api_base_url'), config('app.tablet_domain'), config('app.env'));
 });
 
 require __DIR__ . '/auth.php';
